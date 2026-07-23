@@ -211,7 +211,7 @@ elif page=="📁 Batch Prediction":
 
     st.header("📁 Batch Prediction")
 
-    st.info("Prediction will be added in Part-2")
+    st.info("Prediction will be here ")
 
 # -------------------------------------------------------
 # MODEL PERFORMANCE
@@ -221,7 +221,7 @@ elif page=="📈 Model Performance":
 
     st.header("📈 Model Performance")
 
-    st.info("Accuracy, Confusion Matrix and Reports will be added in Part-2")
+    st.info("Accuracy, Confusion Matrix and Reports will be here")
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
