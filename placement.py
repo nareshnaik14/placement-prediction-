@@ -648,6 +648,7 @@ elif page == "🤖 Model Training":
             # -----------------------------------
 
             if df1 is not None:
+                st.write(df1)
 
                 student = df1.copy()
 
