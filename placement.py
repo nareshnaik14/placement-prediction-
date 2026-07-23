@@ -459,10 +459,10 @@ with col6:
 
     st.plotly_chart(fig, use_container_width=True)
 
-     st.markdown("---")
+    st.markdown("---")
 
-     st.subheader("Predicted Salary by Student")
-     fig = px.bar(
+    st.subheader("Predicted Salary by Student")
+  fig = px.bar(
           result.sort_values("Predicted_Salary", ascending=False),
           x="Student_ID",
           y="Predicted_Salary",
