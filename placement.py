@@ -380,7 +380,7 @@ elif page == "📊 Data Analysis":
             st.markdown("---")
             col3, col4 = st.columns(2)
             # CGPA vs Placement
-             with col3:
+            with col3:
                  fig = px.box(
                      result,
                      x="Predicted_Placement",
