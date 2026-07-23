@@ -67,18 +67,46 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
+# -------------------------------------------------------
+# LOAD DATASET
+# -------------------------------------------------------
+
+@st.cache_data
+def load_data(student_dataset):
+    # student_dataset = st.sidebar.file_uploader(...)
+
+    if student_dataset.name.endswith(".csv"):
+        df = pd.read_csv(student_dataset)
+
+    elif student_dataset.name.endswith(".xlsx"):
+        df = pd.read_excel(student_dataset)
+
+    elif student_dataset.name.endswith(".xls"):
+        df = pd.read_excel(student_dataset)
+
+    else:
+        st.error("Please upload a CSV or Excel (.xlsx/.xls) file.")
+        return None
+
+    return df
+
+
+# -------------------------------------------------------
+# FILE UPLOADER
+# -------------------------------------------------------
 
 student_dataset = st.sidebar.file_uploader(
     "Upload Student Dataset",
-    type=["csv","xlsx", "xls", "json", "txt", "tsv","pdf","pptx"]
+    type=["csv", "xlsx", "xls", "json", "txt", "tsv", "pdf", "pptx"]
 )
 
 single_student = st.sidebar.file_uploader(
     "Upload Single Student File",
-    type=["csv","xlsx", "xls", "json", "txt", "tsv","pdf","pptx"]
-) 
+    type=["csv", "xlsx", "xls", "json", "txt", "tsv", "pdf", "pptx"]
+)
 
-df=None
+df = None
+
 if student_dataset is not None:
     df = load_data(student_dataset)
 
@@ -107,38 +135,9 @@ Features Used:
 ✔ Attendance
 
 ✔ Interview Score
-
 """
 )
 
-# -------------------------------------------------------
-# LOAD DATASET
-# -------------------------------------------------------  
-#"""if student_dataset is not None:
-   #  df=load_data(student_dataset)"""
-
-@st.cache_data
-def load_data(student_dataset):
-    #student_dataset=st.sidebar.file_uploader(....)
- # if student_dataset is not None:
-   #  df=load_data(student_dataset)
-
-    if student_dataset.name.endswith(".csv"):
-        df = pd.read_csv(student_dataset)
-    elif student_dataset.name.endswith(".xlsx"):
-        df = pd.read_excel(student_dataset)
-    elif student_dataset.name.endswith(".xls"):
-        df = pd.read_excel(student_dataset)
-    
-    else:
-        st.error("Please upload a CSV or Excel (.xlsx/.xls) file.")
-        st.stop()
-        return None
-
-    return df
-    df= None
-    if student_dataset is not None:
-        df=load_data(student_dataset)
 # -------------------------------------------------------
 # DASHBOARD
 # -------------------------------------------------------
@@ -148,7 +147,7 @@ if page == "🏠 Dashboard":
          
          st.success("Dataset Loaded Successfully")
          st.subheader("Dataset Preview")
-         st.dataframe(df.head(),use_container_width=true)
+         st.dataframe(df.head(), use_container_width=True)
    # else:
         # st.warning("Please upload Student Dataset.")
          total_students = len(df)
