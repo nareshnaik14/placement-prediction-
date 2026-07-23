@@ -109,8 +109,8 @@ Features Used:
 # -------------------------------------------------------
 # LOAD DATASET
 # -------------------------------------------------------  
-"""if student_dataset is not None:
-     df=load_data(student_dataset)"""
+#"""if student_dataset is not None:
+   #  df=load_data(student_dataset)"""
 
 @st.cache_data
 def load_data(student_dataset):
@@ -137,15 +137,14 @@ def load_data(student_dataset):
 # DASHBOARD
 # -------------------------------------------------------
 if page == "🏠 Dashboard":
-    df=None
     if df is not None:
          st.header("📋 Dashboard")
          
          st.success("Dataset Loaded Successfully")
          st.subheader("Dataset Preview")
-         st.dataframe(df.head())
-    else:
-         st.warning("Please upload Student Dataset.")
+         st.dataframe(df.head(),use_container_width=true)
+   # else:
+        # st.warning("Please upload Student Dataset.")
          total_students = len(df)
          placed = len(df[df["Placement_Status"]=="Placed"])
          not_placed = len(df[df["Placement_Status"]=="Not Placed"])
@@ -157,6 +156,8 @@ if page == "🏠 Dashboard":
          c2.metric("Placed",placed )
          c3.metric("Placement %", f"{placement_percentage:.2f}%" )
          c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
+        else:
+         st.warning("Please upload Student Dataset.")
 
     """ st.markdown("---")
 
