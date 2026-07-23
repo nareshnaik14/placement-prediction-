@@ -366,157 +366,116 @@ elif page=="📈 Model Performance":
 # DATA ANALYSIS
 # -------------------------------------------------------
 elif page == "📊 Data Analysis":
+    st.markdown("---")
+    st.header("📈 Student Prediction Analytics")
 
-    st.header("📊 Student Placement Analytics")
+     result = st.session_state["prediction_df"]
 
-    if df is not None:
+    col1, col2 = st.columns(2)
 
-        st.subheader("Dataset Preview")
-        st.dataframe(df.head(), use_container_width=True)
+      # Placement Pie Chart
+with col1:
 
-        col1, col2 = st.columns(2)
+    fig = px.pie(
+        result,
+        names="Predicted_Placement",
+        title="Predicted Placement Percentage",
+        hole=0.45,
+        color="Predicted_Placement",
+        color_discrete_map={
+            "Placed": "green",
+            "Not Placed": "red"
+        }
+    )
 
-        # Placement Pie Chart
-        with col1:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.pie(
-                df,
-                names="Placement_Status",
-                title="Placement Percentage",
-                hole=0.45,
-                color="Placement_Status",
-                color_discrete_map={
-                    "Placed":"green",
-                    "Not Placed":"red"
-                }
-            )
+# Salary Distribution
+with col2:
 
-            st.plotly_chart(fig, use_container_width=True)
+    fig = px.histogram(
+        result,
+        x="Predicted_Salary",
+        nbins=20,
+        title="Predicted Salary Distribution"
+    )
 
-        # Salary Distribution
-        with col2:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.histogram(
-                df,
-                x="Salary_LPA",
-                nbins=20,
-                title="Salary Distribution"
-            )
+st.markdown("---")
 
-            st.plotly_chart(fig, use_container_width=True)
+col3, col4 = st.columns(2)
 
-        st.markdown("---")
+# CGPA vs Placement
+with col3:
 
-        col3, col4 = st.columns(2)
+    fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="CGPA",
+        color="Predicted_Placement",
+        title="CGPA vs Predicted Placement"
+    )
 
-        # CGPA Distribution
-        with col3:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.histogram(
-                df,
-                x="CGPA",
-                color="Placement_Status",
-                title="CGPA Distribution"
-            )
+# Coding Score vs Placement
+with col4:
 
-            st.plotly_chart(fig, use_container_width=True)
+    fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="Coding_Score",
+        color="Predicted_Placement",
+        title="Coding Score vs Predicted Placement"
+    )
 
-        # Coding Score
-        with col4:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.box(
-                df,
-                x="Placement_Status",
-                y="Coding_Score",
-                color="Placement_Status",
-                title="Coding Score Analysis"
-            )
+st.markdown("---")
 
-            st.plotly_chart(fig, use_container_width=True)
+col5, col6 = st.columns(2)
 
-        st.markdown("---")
+# Interview Score
+with col5:
 
-        col5, col6 = st.columns(2)
+    fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="Interview_Score",
+        color="Predicted_Placement",
+        title="Interview Score Analysis"
+    )
 
-        # Interview Score
-        with col5:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.box(
-                df,
-                x="Placement_Status",
-                y="Interview_Score",
-                color="Placement_Status",
-                title="Interview Score Analysis"
-            )
+# Attendance
+with col6:
 
-            st.plotly_chart(fig, use_container_width=True)
+    fig = px.histogram(
+        result,
+        x="Attendance",
+        color="Predicted_Placement",
+        title="Attendance Distribution"
+    )
 
-        # Communication
-        with col6:
+    st.plotly_chart(fig, use_container_width=True)
 
-            fig = px.box(
-                df,
-                x="Placement_Status",
-                y="Communication_Skills",
-                color="Placement_Status",
-                title="Communication Skills"
-            )
+st.markdown("---")
 
-            st.plotly_chart(fig, use_container_width=True)
+st.subheader("Predicted Salary by Student")
 
-        st.markdown("---")
+fig = px.bar(
+    result.sort_values("Predicted_Salary", ascending=False),
+    x="Student_ID",
+    y="Predicted_Salary",
+    color="Predicted_Placement",
+    title="Expected Salary for Each Student"
+)
 
-        col7, col8 = st.columns(2)
+st.plotly_chart(fig, use_container_width=True)
 
-        # Attendance
-        with col7:
-
-            fig = px.histogram(
-                df,
-                x="Attendance",
-                color="Placement_Status",
-                title="Attendance Distribution"
-            )
-
-            st.plotly_chart(fig, use_container_width=True)
-
-        # Internship
-        with col8:
-
-            internship = (
-                df.groupby("Internship")["Placement_Status"]
-                .count()
-                .reset_index()
-            )
-
-            fig = px.bar(
-                internship,
-                x="Internship",
-                y="Placement_Status",
-                title="Internship Analysis"
-            )
-
-            st.plotly_chart(fig, use_container_width=True)
-
-        st.markdown("---")
-
-        # Correlation Heatmap
-
-        st.subheader("Correlation Heatmap")
-
-        numeric = df.select_dtypes(include="number")
-
-        fig = px.imshow(
-            numeric.corr(),
-            text_auto=".2f",
-            color_continuous_scale="RdBu"
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
-
-    else:
-
-        st.warning("Please Upload Student Dataset")
+    
       # -------------------------------------------------------
 # MODEL TRAINING
 # -------------------------------------------------------
