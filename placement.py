@@ -111,7 +111,7 @@ df = None
 if student_dataset is not None:
     df = load_data(student_dataset)
 
-st.write(student_dataset)
+#st.write(student_dataset)
 
 st.sidebar.markdown("---")
 
