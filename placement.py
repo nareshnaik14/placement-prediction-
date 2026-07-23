@@ -144,7 +144,7 @@ if df is not None:
     st.subheader("Dataset Preview")
     st.dataframe(df.head())
 
-else:
+elif:
     st.warning("Please upload Student Dataset.")
     total_students = len(df)
     placed = len(df[df["Placement_Status"]=="Placed"])
