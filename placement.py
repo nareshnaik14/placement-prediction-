@@ -115,8 +115,8 @@ Features Used:
 @st.cache_data
 def load_data(student_dataset):
     #student_dataset=st.sidebar.file_uploader(....)
-  if student_dataset is not None:
-     df=load_data(student_dataset)
+ # if student_dataset is not None:
+   #  df=load_data(student_dataset)
 
     if student_datase.name.endswith(".csv"):
         df = pd.read_csv(file)
@@ -130,6 +130,9 @@ def load_data(student_dataset):
         st.stop()
 
     return df
+    df= None
+    if student_dataset is not non:
+        df=load_data(student_dataset
 # -------------------------------------------------------
 # DASHBOARD
 # -------------------------------------------------------
