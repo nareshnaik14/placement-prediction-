@@ -233,25 +233,6 @@ if page == "🏠 Dashboard":
         st.warning("Please upload a student dataset from the sidebar.")
 
 
-
-# -------------------------------------------------------
-# MODEL TRAINING
-# -------------------------------------------------------
-
-elif page=="🤖 Model Training":
-
-    st.header("🤖 Train Machine Learning Model")
-
-    if df is not None:
-
-        st.success("Dataset Loaded Successfully")
-
-        st.write(df.shape)
-
-    else:
-
-        st.warning("Upload Dataset")
-
 # -------------------------------------------------------
 # SINGLE PREDICTION
 # -------------------------------------------------------
@@ -367,6 +348,9 @@ elif page == "📊 Data Analysis":
         st.warning("⚠ Please train the model first to view student predictions.")
         if "prediction_df" in st.session_state:
             result = st.session_state["prediction_df"]
+            fig = px.pie(result, ...)
+            fig = px.histogram(result, ...)
+            fig = px.box(result, ...)
             st.subheader("📈 Student Prediction Analytics")
             st.dataframe(result)
         else:
