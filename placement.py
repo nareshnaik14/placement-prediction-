@@ -109,7 +109,7 @@ Features Used:
 # -------------------------------------------------------
 # LOAD DATASET
 # -------------------------------------------------------  
-if student_dataset is not None
+if student_dataset is not None:
      df=load_data(student_dataset)
 
 @st.cache_data
