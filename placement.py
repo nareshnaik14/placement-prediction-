@@ -135,17 +135,14 @@ def load_data(file):
 # DASHBOARD
 # -------------------------------------------------------
 if page == "🏠 Dashboard":
-    st.header("📋 Dashboard")
-    df=None
-  if df is not None:
-        
-    st.success("Dataset Loaded Successfully")
-
-    st.subheader("Dataset Preview")
-    st.dataframe(df.head())
-
-  else:
-    st.warning("Please upload Student Dataset.")
+    if df is not None:
+         st.header("📋 Dashboard")
+         df=None
+         st.success("Dataset Loaded Successfully")
+         st.subheader("Dataset Preview")
+         st.dataframe(df.head())
+    else:
+         st.warning("Please upload Student Dataset.")
     total_students = len(df)
     placed = len(df[df["Placement_Status"]=="Placed"])
     not_placed = len(df[df["Placement_Status"]=="Not Placed"])
