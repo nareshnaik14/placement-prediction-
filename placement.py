@@ -246,6 +246,9 @@ elif page=="📊 Data Analysis":
     if os.path.exists("student data.xlsx"):
 
        # result = st.session_state["prediction_df"]
+        #result = pd.read_excel("student data.xlsx")
+        st.write("Session Keys:", list(st.session_state.keys()))
+        st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
         result = pd.read_excel("student data.xlsx")
 
         st.subheader("🎓 Student Prediction Table")
@@ -675,6 +678,8 @@ elif page == "🤖 Model Training":
                 student["Predicted_Salary"] = salary_prediction.round(2)
                  # Save Prediction Dataset
                 st.session_state["prediction_df"] = student
+                st.write("After Saving:", list(st.session_state.keys()))
+                st.write("Prediction rows:", len(student))
                 st.success("Prediction saved successfully.")
                 # Save prediction results
                 student.to_excel("student data.xlsx", index=False)
