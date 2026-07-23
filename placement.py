@@ -427,7 +427,7 @@ elif page == "📊 Data Analysis":
 
     st.markdown("---")
 
-          col5, col6 = st.columns(2)
+    col5, col6 = st.columns(2)
 
      # Interview Score
     with col5:
