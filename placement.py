@@ -400,32 +400,32 @@ elif page == "📊 Data Analysis":
             st.markdown("---")
             col5, col6 = st.columns(2)
            # Interview Score
-        with col5:
-            fig = px.box(
-            result,
-            x="Predicted_Placement",
-            y="Interview_Score",
-            color="Predicted_Placement",
-            title="Interview Score Analysis")
+            with col5:
+                fig = px.box(
+                    result,
+                   x="Predicted_Placement",
+                       y="Interview_Score",
+                      color="Predicted_Placement",
+                       title="Interview Score Analysis")
             
-        st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
         # Attendance
-        with col6:
-            fig = px.histogram(
-            result,
-            x="Attendance",
-            color="Predicted_Placement",
-            title="Attendance Distribution")
-        st.plotly_chart(fig, use_container_width=True)
-        st.markdown("---")
-        st.subheader("Predicted Salary by Student")
-        fig = px.bar(
-            result.sort_values("Predicted_Salary", ascending=False),
+            with col6:
+                fig = px.histogram(
+                 result,
+                x="Attendance",
+                color="Predicted_Placement",
+                title="Attendance Distribution")
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown("---")
+            st.subheader("Predicted Salary by Student")
+            fig = px.bar(
+                result.sort_values("Predicted_Salary", ascending=False),
             x="Student_ID",
             y="Predicted_Salary",
             color="Predicted_Placement",
             title="Expected Salary for Each Student")
-        st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
 
   
 # -------------------------------------------------------
