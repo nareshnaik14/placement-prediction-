@@ -185,7 +185,7 @@ else:
 # DATA ANALYSIS
 # -------------------------------------------------------
 
-elif page=="📊 Data Analysis":
+ elif page=="📊 Data Analysis":
 
     st.header("📊 Student Dataset Analysis")
 
