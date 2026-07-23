@@ -92,7 +92,7 @@ def load_data(student_dataset):
     return df
 
 # Training Dataset (stored in GitHub)
-df1 = pd.read_csv("Company_Placement_Dataset.csv")
+df1 = pd.read_exel("Company_Placement_Dataset.xlsx")
 # -------------------------------------------------------
 # FILE UPLOADER
 # -------------------------------------------------------
