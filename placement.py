@@ -420,7 +420,7 @@ elif page == "📊 Data Analysis":
            title="Coding Score vs Predicted Placement")
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("---")
-        col5, col6 = st.columns(2)
+    col5, col6 = st.columns(2)
         # Interview Score
     with col5:
         fig = px.box(
