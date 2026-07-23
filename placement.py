@@ -164,7 +164,7 @@ if page == "🏠 Dashboard":
         placed = (result["Predicted_Placement"] == "Placed").sum()
         not_placed = (result["Predicted_Placement"] == "Not Placed").sum()
         placement_percentage = (placed / total_students) * 100
-        avg_salary =  = result["Predicted_Salary"].mean()
+        avg_salary = result["Predicted_Salary"].mean()
 
         c1, c2, c3, c4 = st.columns(4)
 
