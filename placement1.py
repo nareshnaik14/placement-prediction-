@@ -793,7 +793,7 @@ elif page == "🤖 Model Training":
             # SALARY PREDICTION MODEL
             # =====================================================
 
-            st.subheader("💰 Salary Prediction Model")
+                    st.subheader("💰 Salary Prediction Model")
 
             X_salary = data[features]
 
@@ -832,6 +832,7 @@ elif page == "🤖 Model Training":
                 X_test_s
 
             )
+
 
             # ---------------------------------------
             # Regression Metrics
