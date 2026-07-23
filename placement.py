@@ -109,23 +109,22 @@ Features Used:
 # -------------------------------------------------------
 # LOAD DATASET
 # -------------------------------------------------------  
-if student_dataset is not None:
-     df=load_data(student_dataset)
+"""if student_dataset is not None:
+     df=load_data(student_dataset)"""
 
 @st.cache_data
 def load_data(student_dataset):
+    student_dataset=st.sidebar.file_uploader(....)
+if student_dataset is not None:
+     df=load_data(student_dataset)
 
-    if file.name.endswith(".csv"):
+    if student_datase.name.endswith(".csv"):
         df = pd.read_csv(file)
-    elif file.name.endswith(".xlsx"):
+    elif student_datase.name.endswith(".xlsx"):
         df = pd.read_excel(file)
-    elif file.name.endswith(".xls"):
+    elif student_datase.name.endswith(".xls"):
         df = pd.read_excel(file)
-    elif file.name.endswith(".pdf"):
-        df = pd.read_pdf(file)
-    elif file.name.endswith(".pptx"):
-        df = pd.read_pptx(file)
-
+    
     else:
         st.error("Please upload a CSV or Excel (.xlsx/.xls) file.")
         st.stop()
