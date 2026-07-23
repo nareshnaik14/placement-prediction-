@@ -95,6 +95,8 @@ def load_data(student_dataset):
 # -------------------------------------------------------
 # FILE UPLOADER
 # -------------------------------------------------------
+# Training Dataset (stored in GitHub)
+df1 = pd.read_csv("Company_Placement_Dataset.csv")
 
 student_dataset = st.sidebar.file_uploader(
     "Upload Student Dataset",
