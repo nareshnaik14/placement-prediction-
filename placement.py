@@ -159,27 +159,26 @@ else:
     c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
     st.markdown("---")
 
-        tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
+    tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
-        with tab1:
+with tab1:
 
-            st.dataframe(
-                df,
-                use_container_width=True
+      st.dataframe(
+             df,
+             use_container_width=True
             )
 
-        with tab2:
-
-            st.dataframe(
-                df.describe(),
-                use_container_width=True
+with tab2:
+     st.dataframe(
+     df.describe(),
+        use_container_width=True
             )
 
-        with tab3:
+ with tab3:
 
             st.write(df.head())
 
-    else:
+else:
 
         st.warning(
             "Please upload Student Dataset."
