@@ -511,11 +511,9 @@ elif page == "🤖 Model Training":
             classifier = DecisionTreeClassifier(
                 random_state=42
             )
-
             classifier.fit(X_train, y_train)
-
             y_pred = classifier.predict(X_test)
-
+            
             accuracy = accuracy_score(
                 y_test,
                 y_pred
@@ -585,7 +583,7 @@ elif page == "🤖 Model Training":
             st.session_state["features"] = features
 
             # -----------------------------------
-            # Metrics
+            # training result
             # -----------------------------------
 
             st.success("✅ Models Trained Successfully")
@@ -658,18 +656,18 @@ elif page == "🤖 Model Training":
                     "No": 0
                 })
 
-                X_student = student[features]
+                X_student = student[st.session_state["features"]
 
-                placement_prediction = classifier.predict(X_student)
+                placement_prediction =st.session_state["classifier"].predict(X_student)
 
-                salary_prediction = regressor.predict(X_student)
-
-                student["Predicted_Placement"] = le.inverse_transform(
+                salary_prediction =st.session_state["regressor"].predict(X_student)
+               # Convert Placement Labels
+                student["Predicted_Placement"] =st.session_state[ "le"].inverse_transform(
                     placement_prediction
                 )
-
+                 # Add Salary Prediction
                 student["Predicted_Salary"] = salary_prediction.round(2)
-
+                 # Save Prediction Dataset
                 st.session_state["prediction_df"] = student
 
                 st.markdown("---")
