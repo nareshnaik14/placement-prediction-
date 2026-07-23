@@ -146,7 +146,7 @@ if df is not None:
 
 else:
     st.warning("Please upload Student Dataset.")
-        total_students = len(df);
+    total_students = len(df)
         placed = len(df[df["Placement_Status"]=="Placed"])
         not_placed = len(df[df["Placement_Status"]=="Not Placed"])
         placement_percentage = (placed/total_students)*100
