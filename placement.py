@@ -241,9 +241,11 @@ elif page=="📊 Data Analysis":
     st.write("Session State Keys:")
     st.write(list(st.session_state.keys()))
 
-    if "prediction_df" in st.session_state:
+   # if "prediction_df" in st.session_state:
+    if os.path.exists("Company_Placement_Dataset.xlsx"):
 
-        result = st.session_state["prediction_df"]
+       # result = st.session_state["prediction_df"]
+        result = pd.read_excel("Company_Placement_Dataset.xlsx")
 
         st.subheader("🎓 Student Prediction Table")
 
@@ -674,7 +676,7 @@ elif page == "🤖 Model Training":
                 st.session_state["prediction_df"] = student
                 st.success("Prediction saved successfully.")
                 # Save prediction results
-                student.to_csv("prediction_results.csv", index=False)
+                student.to_csv("Company_Placement_Dataset.csv", index=False)
                 st.success("Prediction completed successfully.")
                 st.write(st.session_state.keys())
                 st.dataframe(student,use_container_width=True)
