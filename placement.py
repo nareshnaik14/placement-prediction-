@@ -462,7 +462,7 @@ with col6:
     st.markdown("---")
 
     st.subheader("Predicted Salary by Student")
-  fig = px.bar(
+    fig = px.bar(
           result.sort_values("Predicted_Salary", ascending=False),
           x="Student_ID",
           y="Predicted_Salary",
