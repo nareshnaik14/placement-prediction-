@@ -432,7 +432,7 @@ elif page == "📊 Data Analysis":
      # Interview Score
     with col5:
 
-    fig = px.box(
+     fig = px.box(
         result,
         x="Predicted_Placement",
         y="Interview_Score",
