@@ -419,7 +419,7 @@ elif page == "📊 Data Analysis":
            color="Predicted_Placement",
            title="Coding Score vs Predicted Placement")
     st.plotly_chart(fig, use_container_width=True)
-        st.markdown("---")
+    st.markdown("---")
         col5, col6 = st.columns(2)
         # Interview Score
     with col5:
@@ -429,7 +429,7 @@ elif page == "📊 Data Analysis":
             y="Interview_Score",
             color="Predicted_Placement",
             title="Interview Score Analysis")
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
         # Attendance
     with col6:
         fig = px.histogram(
@@ -437,9 +437,9 @@ elif page == "📊 Data Analysis":
             x="Attendance",
             color="Predicted_Placement",
             title="Attendance Distribution")
-        st.plotly_chart(fig, use_container_width=True)
-        st.markdown("---")
-        st.subheader("Predicted Salary by Student")
+    st.plotly_chart(fig, use_container_width=True)
+    st.markdown("---")
+    st.subheader("Predicted Salary by Student")
         fig = px.bar(
             result.sort_values("Predicted_Salary", ascending=False),
             x="Student_ID",
