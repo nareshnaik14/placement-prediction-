@@ -382,7 +382,7 @@ elif page == "📊 Data Analysis":
             "Not Placed": "red"
            }
        )
-        st.plotly_chart(fig, use_container_width=True)
+           st.plotly_chart(fig, use_container_width=True)
 
      # Salary Distribution
      with col2:
