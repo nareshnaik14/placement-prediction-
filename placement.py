@@ -157,14 +157,15 @@ if page == "🏠 Dashboard":
     # ==========================
     st.subheader("📘 Student Dataset")
 
-    if df is not None:
+    if df1 is not None:
         
 
-        total_students = len(df)
-        placed = len(df[df["Placement_Status"] == "Placed"])
-        not_placed = len(df[df["Placement_Status"] == "Not Placed"])
+        total_students = len(df1)
+        placed = (df1["Placement_Status"] == "Placed").sum()
+        not_placed = (df1["Placement_Status"] == "Not Placed").sum()
         placement_percentage = (placed / total_students) * 100
-        avg_salary = df["Salary_LPA"].mean()
+        avg_salary = df1.loc[df1"Predicted_Placement"] == "Placed",
+            "Predicted_Salary""].mean()
 
         c1, c2, c3, c4 = st.columns(4)
 
@@ -174,6 +175,28 @@ if page == "🏠 Dashboard":
         c4.metric("Placement %", f"{placement_percentage:.2f}%")
 
         st.metric("Average Salary", f"{avg_salary:.2f} LPA")
+
+        st.markdown("---")
+
+        st.subheader("Prediction Results")
+
+        st.dataframe(df1, use_container_width=True)
+
+        csv = df1.to_csv(index=False).encode("utf-8")
+
+        st.download_button(
+            "📥 Download Prediction Results",
+            csv,
+            "placement_predictions.csv",
+            "text/csv"
+        )
+
+    else:
+        st.warning("Please upload a student dataset.")
+        
+
+
+        
         st.subheader("Company Dataset")
 
         tab1, tab2, tab3 = st.tabs(
