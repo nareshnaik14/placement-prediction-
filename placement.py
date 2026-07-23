@@ -113,7 +113,7 @@ if student_dataset is not None:
      df=load_data(student_dataset)
 
 @st.cache_data
-def load_data(file):
+def load_data(student_dataset):
 
     if file.name.endswith(".csv"):
         df = pd.read_csv(file)
