@@ -372,9 +372,9 @@ elif page == "📊 Data Analysis":
     col1, col2 = st.columns(2)
 
 # Placement Pie Chart
-with col1:
+  with col1:
 
-    fig = px.pie(
+     fig = px.pie(
         result,
         names="Predicted_Placement",
         title="Predicted Placement Percentage",
