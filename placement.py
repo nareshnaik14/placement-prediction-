@@ -84,14 +84,23 @@ st.sidebar.info(
 """
 Features Used
 ✔ CGPA
+
 ✔ Coding Score
+
 ✔ Aptitude Score
+
 ✔ Communication Skills
+
 ✔ Projects
+
 ✔ Certifications
+
 ✔ Internship
+
 ✔ Attendance
+
 ✔ Interview Score
+
 """
 )
 
