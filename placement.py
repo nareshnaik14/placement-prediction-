@@ -672,7 +672,10 @@ elif page == "🤖 Model Training":
                 student["Predicted_Salary"] = salary_prediction.round(2)
                  # Save Prediction Dataset
                 st.session_state["prediction_df"] = student
-                st.success("Prediction saved successfully.")
+                 st.success("Prediction saved successfully.")
+                # Save prediction results
+                student.to_csv("prediction_results.csv", index=False)
+                st.success("Prediction completed successfully.")
                 st.write(st.session_state.keys())
                 st.dataframe(student,use_container_width=True)
                 st.dataframe(st.session_state["prediction_df"])
