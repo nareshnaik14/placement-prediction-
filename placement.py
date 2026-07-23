@@ -401,14 +401,12 @@ elif page == "📊 Data Analysis":
 
          # CGPA vs Placement
     with col3:
-
-     fig = px.box(
-        result,
-        x="Predicted_Placement",
-        y="CGPA",
-        color="Predicted_Placement",
-        title="CGPA vs Predicted Placement"
-         )
+        fig = px.box(
+            result,
+            x="Predicted_Placement",
+            y="CGPA",
+            color="Predicted_Placement",
+            title="CGPA vs Predicted Placement")
         st.plotly_chart(fig, use_container_width=True)
 
          # Coding Score vs Placement
