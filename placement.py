@@ -13,8 +13,8 @@ import joblib
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomTreeClassifier
-from sklearn.ensemble import RandomTreeRegressor
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
