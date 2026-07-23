@@ -77,19 +77,19 @@ def load_data(student_dataset):
     # student_dataset = st.sidebar.file_uploader(...)
 
     if student_dataset.name.endswith(".csv"):
-        df = pd.read_csv(student_dataset)
+        df1 = pd.read_csv(student_dataset)
 
     elif student_dataset.name.endswith(".xlsx"):
-        df = pd.read_excel(student_dataset)
+        df1 = pd.read_excel(student_dataset)
 
     elif student_dataset.name.endswith(".xls"):
-        df = pd.read_excel(student_dataset)
+        df1 = pd.read_excel(student_dataset)
 
     else:
         st.error("Please upload a CSV or Excel (.xlsx/.xls) file.")
         return None
 
-    return df
+    return df1
 
 # Training Dataset (stored in GitHub)
 df = pd.read_excel("Company_Placement_Dataset.xlsx")
