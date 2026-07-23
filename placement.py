@@ -137,14 +137,14 @@ def load_data(file):
 if page == "🏠 Dashboard":
     st.header("📋 Dashboard")
     df=None
-if df is not None:
+  if df is not None:
         
     st.success("Dataset Loaded Successfully")
 
     st.subheader("Dataset Preview")
     st.dataframe(df.head())
 
-else:
+  else:
     st.warning("Please upload Student Dataset.")
     total_students = len(df)
     placed = len(df[df["Placement_Status"]=="Placed"])
@@ -184,8 +184,7 @@ else:
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
-
- elif page=="📊 Data Analysis":
+elif page=="📊 Data Analysis":
 
     st.header("📊 Student Dataset Analysis")
 
