@@ -425,7 +425,7 @@ elif page == "📊 Data Analysis":
 
     st.plotly_chart(fig, use_container_width=True)
 
-         st.markdown("---")
+    st.markdown("---")
 
           col5, col6 = st.columns(2)
 
