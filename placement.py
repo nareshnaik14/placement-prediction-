@@ -467,10 +467,8 @@ with col6:
           x="Student_ID",
           y="Predicted_Salary",
           color="Predicted_Placement",
-          title="Expected Salary for Each Student"
-      )
-
-       st.plotly_chart(fig, use_container_width=True)
+          title="Expected Salary for Each Student")
+          st.plotly_chart(fig, use_container_width=True)
 
     
       # -------------------------------------------------------
