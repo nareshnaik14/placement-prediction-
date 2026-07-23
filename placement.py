@@ -131,7 +131,7 @@ def load_data(student_dataset):
 
     return df
     df= None
-    if student_dataset is not non:
+    if student_dataset is not None:
         df=load_data(student_dataset)
 # -------------------------------------------------------
 # DASHBOARD
