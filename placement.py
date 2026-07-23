@@ -385,7 +385,7 @@ elif page == "📊 Data Analysis":
     st.plotly_chart(fig, use_container_width=True)
 
      # Salary Distribution
-     with col2:
+    with col2:
         fig = px.histogram(
         result,
         x="Predicted_Salary",
@@ -400,7 +400,7 @@ elif page == "📊 Data Analysis":
         col3, col4 = st.columns(2)
 
          # CGPA vs Placement
-     with col3:
+    with col3:
 
      fig = px.box(
         result,
@@ -410,10 +410,10 @@ elif page == "📊 Data Analysis":
         title="CGPA vs Predicted Placement"
     )
 
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
      # Coding Score vs Placement
-     with col4:
+    with col4:
 
        fig = px.box(
         result,
@@ -430,7 +430,7 @@ elif page == "📊 Data Analysis":
           col5, col6 = st.columns(2)
 
      # Interview Score
-     with col5:
+    with col5:
 
     fig = px.box(
         result,
@@ -440,10 +440,10 @@ elif page == "📊 Data Analysis":
         title="Interview Score Analysis"
     )
 
-        st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
 # Attendance
-     with col6:
+    with col6:
 
     fig = px.histogram(
         result,
