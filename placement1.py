@@ -787,7 +787,7 @@ elif page == "🤖 Model Training":
 
         st.warning("Please Upload Student Dataset")
 
-            st.markdown("---")
+        st.markdown("---")
 
             # =====================================================
             # SALARY PREDICTION MODEL
