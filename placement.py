@@ -174,7 +174,7 @@ if page == "🏠 Dashboard":
         c4.metric("Placement %", f"{placement_percentage:.2f}%")
 
         st.metric("Average Salary", f"{avg_salary:.2f} LPA")
-         st.subheader("company dataset")
+        st.subheader("company dataset")
 
         tab1, tab2, tab3 = st.tabs(
             ["Training Dataset", "Statistics", "Preview"]
