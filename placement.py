@@ -365,9 +365,15 @@ elif page == "📊 Data Analysis":
 
     else:
         st.warning("⚠ Please train the model first to view student predictions.")
+        if "prediction_df" in st.session_state:
+            result = st.session_state["prediction_df"]
+            st.subheader("📈 Student Prediction Analytics")
+            st.dataframe(result)
+        else:
+            st.warning("⚠ Please train the model first.")
     st.markdown("---")
     st.header("📈 Student Prediction Analytics")
-    result = st.session_state["prediction_df"]
+    #result = st.session_state["prediction_df"]
     col1, col2 = st.columns(2)
     with col1:
        fig = px.pie(
