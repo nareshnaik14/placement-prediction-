@@ -362,17 +362,13 @@ elif page == "📊 Data Analysis":
             with col1:
                 fig = px.pie(
                 result,
-           names="Predicted_Placement",
-        title="Predicted Placement Percentage",
-        hole=0.45,
-        color="Predicted_Placement",
-        color_discrete_map={
-            "Placed": "green",
-            "Not Placed": "red"
-           }
-       )
-    st.plotly_chart(fig, use_container_width=True)
-
+                    names="Predicted_Placement",
+                    title="Predicted Placement Percentage",
+                    hole=0.45,
+                    color="Predicted_Placement",
+                    color_discrete_map={
+                        "Placed": "green","Not Placed": "red" })
+            st.plotly_chart(fig, use_container_width=True)
      # Salary Distribution
     with col2:
         fig = px.histogram(
