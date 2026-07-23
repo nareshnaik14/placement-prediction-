@@ -157,14 +157,14 @@ if page == "🏠 Dashboard":
     # ==========================
     st.subheader("📘 Student Dataset")
 
-    if df1 is not None:
+    if "prediction_df" in st.session_state:
         
-
-        total_students = len(df1)
-        placed = (df1["Placement_Status"] == "Placed").sum()
-        not_placed = (df1["Placement_Status"] == "Not Placed").sum()
+        result = st.session_state["prediction_df"]
+        total_students = len(result)
+        placed = (result["Predicted_Placement"] == "Placed").sum()
+        not_placed = (result["Predicted_Placement"] == "Not Placed").sum()
         placement_percentage = (placed / total_students) * 100
-        avg_salary = df1.loc[df1["Predicted_Placement"] == "Placed", "Predicted_Salary"].mean()
+        avg_salary =  = result["Predicted_Salary"].mean()
 
         c1, c2, c3, c4 = st.columns(4)
 
@@ -473,31 +473,34 @@ elif page == "📊 Data Analysis":
       # -------------------------------------------------------
 # MODEL TRAINING
 # -------------------------------------------------------
-
 elif page == "🤖 Model Training":
 
     st.header("🤖 Train Placement Prediction Models")
 
     if df is not None:
 
-        train_btn = st.button("🚀 Train Models")
-
-        if train_btn:
+        if st.button("🚀 Train Models"):
 
             data = df.copy()
 
-            # Encode Internship
+            # -----------------------------------
+            # Encode Categorical Columns
+            # -----------------------------------
+
             data["Internship"] = data["Internship"].map({
-                "Yes":1,
-                "No":0
+                "Yes": 1,
+                "No": 0
             })
 
-            # Encode Placement
             le = LabelEncoder()
 
             data["Placement_Status"] = le.fit_transform(
                 data["Placement_Status"]
             )
+
+            # -----------------------------------
+            # Features
+            # -----------------------------------
 
             features = [
                 "CGPA",
@@ -511,52 +514,48 @@ elif page == "🤖 Model Training":
                 "Interview_Score"
             ]
 
-            # -----------------------------
-            # Classification
-            # -----------------------------
+            # -----------------------------------
+            # Classification Model
+            # -----------------------------------
 
             X = data[features]
-
             y = data["Placement_Status"]
 
-            X_train,X_test,y_train,y_test = train_test_split(
+            X_train, X_test, y_train, y_test = train_test_split(
                 X,
                 y,
                 test_size=0.20,
                 random_state=42
             )
 
-            classifier = RandomForestClassifier(
-                n_estimators=200,
+            classifier = DecisionTreeClassifier(
                 random_state=42
             )
 
-            classifier.fit(X_train,y_train)
+            classifier.fit(X_train, y_train)
 
-            prediction = classifier.predict(X_test)
+            y_pred = classifier.predict(X_test)
 
             accuracy = accuracy_score(
                 y_test,
-                prediction
+                y_pred
             )
 
-            # -----------------------------
-            # Regression
-            # -----------------------------
+            # -----------------------------------
+            # Regression Model
+            # -----------------------------------
 
             X_salary = data[features]
-
             y_salary = data["Salary_LPA"]
 
-            X_train_s,X_test_s,y_train_s,y_test_s = train_test_split(
+            X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
                 X_salary,
                 y_salary,
                 test_size=0.20,
                 random_state=42
             )
 
-            regressor = RandomForestRegressor(
-                n_estimators=200,
+            regressor = DecisionTreeRegressor(
                 random_state=42
             )
 
@@ -565,21 +564,23 @@ elif page == "🤖 Model Training":
                 y_train_s
             )
 
-            salary_prediction = regressor.predict(
+            salary_pred = regressor.predict(
                 X_test_s
             )
 
             mae = mean_absolute_error(
                 y_test_s,
-                salary_prediction
+                salary_pred
             )
 
             r2 = r2_score(
                 y_test_s,
-                salary_prediction
+                salary_pred
             )
 
+            # -----------------------------------
             # Save Models
+            # -----------------------------------
 
             joblib.dump(
                 classifier,
@@ -591,9 +592,25 @@ elif page == "🤖 Model Training":
                 "salary_model.pkl"
             )
 
+            joblib.dump(
+                le,
+                "label_encoder.pkl"
+            )
+
+            # Store in session state
+
+            st.session_state["classifier"] = classifier
+            st.session_state["regressor"] = regressor
+            st.session_state["label_encoder"] = le
+            st.session_state["features"] = features
+
+            # -----------------------------------
+            # Metrics
+            # -----------------------------------
+
             st.success("✅ Models Trained Successfully")
 
-            c1,c2,c3 = st.columns(3)
+            c1, c2, c3 = st.columns(3)
 
             c1.metric(
                 "Classification Accuracy",
@@ -602,7 +619,7 @@ elif page == "🤖 Model Training":
 
             c2.metric(
                 "Regression R² Score",
-                f"{r2:.2f}"
+                f"{r2:.3f}"
             )
 
             c3.metric(
@@ -612,13 +629,15 @@ elif page == "🤖 Model Training":
 
             st.markdown("---")
 
+            # -----------------------------------
             # Feature Importance
+            # -----------------------------------
 
             importance = pd.DataFrame({
 
-                "Feature":features,
+                "Feature": features,
 
-                "Importance":classifier.feature_importances_
+                "Importance": classifier.feature_importances_
 
             })
 
@@ -646,10 +665,62 @@ elif page == "🤖 Model Training":
                 use_container_width=True
             )
 
+            # -----------------------------------
+            # Predict Uploaded Dataset
+            # -----------------------------------
+
+            if df1 is not None:
+
+                student = df1.copy()
+
+                student["Internship"] = student["Internship"].map({
+                    "Yes": 1,
+                    "No": 0
+                })
+
+                X_student = student[features]
+
+                placement_prediction = classifier.predict(X_student)
+
+                salary_prediction = regressor.predict(X_student)
+
+                student["Predicted_Placement"] = le.inverse_transform(
+                    placement_prediction
+                )
+
+                student["Predicted_Salary"] = salary_prediction.round(2)
+
+                st.session_state["prediction_df"] = student
+
+                st.markdown("---")
+
+                st.subheader("🎯 Prediction Results")
+
+                st.dataframe(
+                    student,
+                    use_container_width=True
+                )
+
+                csv = student.to_csv(index=False).encode("utf-8")
+
+                st.download_button(
+                    "📥 Download Prediction Results",
+                    csv,
+                    "placement_predictions.csv",
+                    "text/csv"
+                )
+
+            else:
+
+                st.info(
+                    "Upload a student dataset to generate predictions."
+                )
+
     else:
 
-        st.warning("Please Upload Student Dataset")
-      # -------------------------------------------------------
+        st.error("Training dataset not found.")
+
+# -------------------------------------------------------
 # SINGLE PREDICTION
 # -------------------------------------------------------
 
