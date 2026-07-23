@@ -149,15 +149,15 @@ else:
     total_students = len(df)
     placed = len(df[df["Placement_Status"]=="Placed"])
     not_placed = len(df[df["Placement_Status"]=="Not Placed"])
-     placement_percentage = (placed/total_students)*100
-     avg_salary = df["Salary_LPA"].mean()
-     c1,c2,c3,c4 = st.columns(4)
+    placement_percentage = (placed/total_students)*100
+    avg_salary = df["Salary_LPA"].mean()
+    c1,c2,c3,c4 = st.columns(4)
 
-     c1.metric("Students", total_students )
-     c2.metric("Placed",placed )
-     c3.metric("Placement %", f"{placement_percentage:.2f}%" )
-     c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
-     st.markdown("---")
+    c1.metric("Students", total_students )
+    c2.metric("Placed",placed )
+    c3.metric("Placement %", f"{placement_percentage:.2f}%" )
+    c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
+    st.markdown("---")
 
         tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
