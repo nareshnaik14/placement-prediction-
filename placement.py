@@ -92,7 +92,7 @@ def load_data(student_dataset):
     return df
 
 # Training Dataset (stored in GitHub)
-df1 = pd.read_excel("Company_Placement_Dataset.xlsx")
+df = pd.read_excel("Company_Placement_Dataset.xlsx")
 # -------------------------------------------------------
 # FILE UPLOADER
 # -------------------------------------------------------
@@ -112,7 +112,7 @@ single_student = st.sidebar.file_uploader(
 df = None
 
 if student_dataset is not None:
-    df = load_data(student_dataset)
+    df1 = load_data(student_dataset)
 
 #st.write(student_dataset)
 
