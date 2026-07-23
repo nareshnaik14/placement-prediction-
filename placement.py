@@ -192,9 +192,7 @@ if page == "🏠 Dashboard":
 
     else:
         st.warning("Please upload a student dataset.")
-        
-
-
+    if df is not None:
         
         st.subheader("Company Dataset")
 
