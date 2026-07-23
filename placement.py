@@ -174,9 +174,9 @@ with tab2:
         use_container_width=True
             )
 with tab3:
-     st.write(df.head())
+    st.write(df.head())
 else:
-     st.warning(
+    st.warning(
      "Please upload Student Dataset."
         )
       student_dataset = st.sidebar.file_uploader(...)
