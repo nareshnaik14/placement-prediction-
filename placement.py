@@ -235,7 +235,7 @@ if page == "🏠 Dashboard":
 # DATA ANALYSIS
 # ------------------------------------------------------- 
 
-elif page=="📊 Data Analysis":
+"""elif page=="📊 Data Analysis":
 
     st.header("📊 Student Dataset Analysis")
 
@@ -276,7 +276,75 @@ elif page=="🤖 Model Training":
 
     else:
 
-        st.warning("Upload Dataset")
+        st.warning("Upload Dataset")"""
+elif page == "📊 Data Analysis":
+
+    st.header("📊 Student Data Analysis")
+
+    if "prediction_df" in st.session_state:
+
+        result = st.session_state["prediction_df"]
+
+        st.subheader("🎓 Student Prediction Table")
+
+        st.dataframe(
+            result,
+            use_container_width=True
+        )
+
+        st.markdown("---")
+
+        c1, c2, c3, c4 = st.columns(4)
+
+        total = len(result)
+
+        placed = (result["Predicted_Placement"] == "Placed").sum()
+
+        not_placed = (result["Predicted_Placement"] == "Not Placed").sum()
+
+        avg_salary = result["Predicted_Salary"].mean()
+
+        c1.metric("Total Students", total)
+        c2.metric("Placed", placed)
+        c3.metric("Not Placed", not_placed)
+        c4.metric("Average Salary", f"{avg_salary:.2f} LPA")
+
+        st.markdown("---")
+
+        st.subheader("📋 Student Placement Report")
+
+        report = result[[
+            "Student_ID",
+            "CGPA",
+            "Coding_Score",
+            "Aptitude_Score",
+            "Communication_Skills",
+            "Projects",
+            "Certifications",
+            "Internship",
+            "Attendance",
+            "Interview_Score",
+            "Predicted_Placement",
+            "Predicted_Salary"
+        ]]
+
+        st.dataframe(
+            report,
+            use_container_width=True
+        )
+
+        csv = report.to_csv(index=False).encode("utf-8")
+
+        st.download_button(
+            "📥 Download Student Prediction Report",
+            csv,
+            "student_prediction_report.csv",
+            "text/csv"
+        )
+
+    else:
+
+        st.warning("⚠ Please train the model first to view student predictions.")
 
 # -------------------------------------------------------
 # SINGLE PREDICTION
