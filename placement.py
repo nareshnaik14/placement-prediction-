@@ -164,7 +164,7 @@ if page == "🏠 Dashboard":
         placed = (df1["Placement_Status"] == "Placed").sum()
         not_placed = (df1["Placement_Status"] == "Not Placed").sum()
         placement_percentage = (placed / total_students) * 100
-        avg_salary = df1.loc[df1"Predicted_Placement"] == "Placed","Predicted_Salary""].mean()
+        avg_salary = df1.loc[df1["Predicted_Placement"] == "Placed", "Predicted_Salary"].mean()
 
         c1, c2, c3, c4 = st.columns(4)
 
