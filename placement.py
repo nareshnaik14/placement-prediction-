@@ -305,28 +305,7 @@ elif page=="📊 Data Analysis":
         st.warning("⚠ Please train the model first to view student predictions.")
 
 
-   """ st.header("📊 Student Dataset Analysis")
 
-    if df is not None:
-         # Show Placed students first
-        display_df = df.sort_values(
-            by="Placement_Status",
-            key=lambda x: x.map({
-                "Placed": 0,
-                "Not Placed": 1
-            })
-        ).reset_index(drop=True)
-
-        st.dataframe(
-            display_df,
-            use_container_width=True
-        )
-
-        st.dataframe(df.head())
-
-    else:
-
-        st.warning("Upload Dataset")"""
 
 # -------------------------------------------------------
 # MODEL TRAINING
