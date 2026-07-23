@@ -371,7 +371,7 @@ elif page == "📊 Data Analysis":
     result = st.session_state["prediction_df"]
     col1, col2 = st.columns(2)
     
-    with col1:
+     with col1:
         fig = px.pie(
         result,
         names="Predicted_Placement",
@@ -401,7 +401,7 @@ elif page == "📊 Data Analysis":
         col3, col4 = st.columns(2)
 
          # CGPA vs Placement
-    with col3:
+     with col3:
 
      fig = px.box(
         result,
@@ -414,7 +414,7 @@ elif page == "📊 Data Analysis":
         st.plotly_chart(fig, use_container_width=True)
 
      # Coding Score vs Placement
-    with col4:
+     with col4:
 
        fig = px.box(
         result,
@@ -431,7 +431,7 @@ elif page == "📊 Data Analysis":
           col5, col6 = st.columns(2)
 
      # Interview Score
-with col5:
+     with col5:
 
     fig = px.box(
         result,
@@ -444,7 +444,7 @@ with col5:
         st.plotly_chart(fig, use_container_width=True)
 
 # Attendance
-with col6:
+     with col6:
 
     fig = px.histogram(
         result,
