@@ -423,7 +423,7 @@ elif page == "📊 Data Analysis":
         title="Coding Score vs Predicted Placement"
     )
 
-         st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
          st.markdown("---")
 
@@ -466,7 +466,7 @@ fig = px.bar(
     title="Expected Salary for Each Student"
 )
 
-      st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
   
 # -------------------------------------------------------
