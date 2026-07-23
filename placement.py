@@ -457,8 +457,8 @@ elif page == "📊 Data Analysis":
 # -------------------------------------------------------
 # MODEL TRAINING
 # -------------------------------------------------------
-
 elif page == "🤖 Model Training":
+    st.write("Before Training:", list(st.session_state.keys()))
 
     st.header("🤖 Train Placement Prediction Models")
 
