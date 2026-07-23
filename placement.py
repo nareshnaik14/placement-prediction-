@@ -149,8 +149,6 @@ if page == "🏠 Dashboard":
          st.success("Dataset Loaded Successfully")
          st.subheader("Dataset Preview")
          st.dataframe(df.head(), use_container_width=True)
-   # else:
-        # st.warning("Please upload Student Dataset.")
          total_students = len(df)
          placed = len(df[df["Placement_Status"]=="Placed"])
          not_placed = len(df[df["Placement_Status"]=="Not Placed"])
@@ -163,32 +161,28 @@ if page == "🏠 Dashboard":
          c3.metric("Placement %", f"{placement_percentage:.2f}%" )
          c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
         
-    else:
-         st.warning("Please upload Student Dataset.")
 
-    """ st.markdown("---")
+        st.markdown("---")
 
        tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
       with tab1:
-
-      st.dataframe(
+          st.dataframe(
              df,
              use_container_width=True
-            )
-
-with tab2:
-     st.dataframe(
-     df.describe(),
+          )
+    with tab2:
+        st.dataframe(
+        df.describe(),
         use_container_width=True
             )
-with tab3:
-    st.write(df.head())
+    with tab3:
+       st.write(df.head())
 else:
     st.warning(
      "Please upload Student Dataset."
         )
-      student_dataset = st.sidebar.file_uploader(...)"""
+      student_dataset = st.sidebar.file_uploader(...)
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
