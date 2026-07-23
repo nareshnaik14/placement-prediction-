@@ -647,8 +647,9 @@ elif page == "🤖 Model Training":
             # Predict Uploaded Dataset
             # -----------------------------------
 
-            if df1 is not None:
+           # if df1 is not None:
                 st.write(df1)
+            if df1 is not None:
 
                 student = df1.copy()
 
