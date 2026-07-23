@@ -122,7 +122,7 @@ if page == "🏠 Dashboard":
         c1.metric("Students", total_students )
         c2.metric("Placed",placed )
         c3.metric("Placement %", f"{placement_percentage:.2f}%" )
-        c4.metric( "Average Salary", f"{avg_salary:.2f} LPA )
+        c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
         st.markdown("---")
 
         tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
