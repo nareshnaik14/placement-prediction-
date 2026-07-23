@@ -156,7 +156,8 @@ if page == "🏠 Dashboard":
          c2.metric("Placed",placed )
          c3.metric("Placement %", f"{placement_percentage:.2f}%" )
          c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
-        else:
+        
+    else:
          st.warning("Please upload Student Dataset.")
 
     """ st.markdown("---")
