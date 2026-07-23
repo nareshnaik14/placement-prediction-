@@ -173,17 +173,13 @@ with tab2:
      df.describe(),
         use_container_width=True
             )
-
- with tab3:
-
-            st.write(df.head())
-
+with tab3:
+     st.write(df.head())
 else:
-
-        st.warning(
-            "Please upload Student Dataset."
+     st.warning(
+     "Please upload Student Dataset."
         )
-student_dataset = st.sidebar.file_uploader(...)
+      student_dataset = st.sidebar.file_uploader(...)
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
