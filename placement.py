@@ -677,7 +677,7 @@ elif page == "🤖 Model Training":
                 st.session_state["prediction_df"] = student
                 st.success("Prediction saved successfully.")
                 # Save prediction results
-                student.to_excel("read_excel("student data.xlsx", index=False)
+                student.to_excel("student data.xlsx", index=False)
                 st.success("Prediction completed successfully.")
                 st.write(st.session_state.keys())
                 st.dataframe(student,use_container_width=True)
