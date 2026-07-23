@@ -648,7 +648,6 @@ elif page == "🤖 Model Training":
             # -----------------------------------
 
            # if df1 is not None:
-                st.write(df1)
             if df1 is not None:
 
                 student = df1.copy()
@@ -673,6 +672,7 @@ elif page == "🤖 Model Training":
                 st.session_state["prediction_df"] = student
                 st.success("Prediction saved successfully.")
                 st.write(st.session_state.keys())
+                st.dataframe(student,use_container_width=True)
                 st.dataframe(st.session_state["prediction_df"])
 
                 st.markdown("---")
