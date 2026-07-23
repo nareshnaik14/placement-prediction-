@@ -443,7 +443,7 @@ elif page == "📊 Data Analysis":
     st.plotly_chart(fig, use_container_width=True)
 
 # Attendance
-    with col6:
+     with col6:
 
     fig = px.histogram(
         result,
