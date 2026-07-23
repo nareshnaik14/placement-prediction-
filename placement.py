@@ -409,7 +409,6 @@ elif page == "📊 Data Analysis":
         color="Predicted_Placement",
         title="CGPA vs Predicted Placement"
          )
-
         st.plotly_chart(fig, use_container_width=True)
 
          # Coding Score vs Placement
