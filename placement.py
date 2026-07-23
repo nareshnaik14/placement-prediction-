@@ -162,9 +162,9 @@ if page == "🏠 Dashboard":
          c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
         
 
-        st.markdown("---")
+         st.markdown("---")
 
-       tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
+         tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
       with tab1:
           st.dataframe(
