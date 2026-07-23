@@ -389,18 +389,18 @@ elif page == "📊 Data Analysis":
                      title="CGPA vs Predicted Placement")
                  st.plotly_chart(fig, use_container_width=True)
                  # Coding Score vs Placement
-         with col4:
+            with col4:
              fig = px.box(
-           result,
-           x="Predicted_Placement",
-           y="Coding_Score",
-           color="Predicted_Placement",
-           title="Coding Score vs Predicted Placement")
-    st.plotly_chart(fig, use_container_width=True)
-    st.markdown("---")
-    col5, col6 = st.columns(2)
-        # Interview Score
-    with col5:
+                result,
+                x="Predicted_Placement",
+                 y="Coding_Score",
+                 color="Predicted_Placement",
+                 title="Coding Score vs Predicted Placement")
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown("---")
+            col5, col6 = st.columns(2)
+           # Interview Score
+        with col5:
         fig = px.box(
             result,
             x="Predicted_Placement",
