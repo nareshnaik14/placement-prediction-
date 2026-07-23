@@ -177,7 +177,7 @@ if page == "🏠 Dashboard":
                 use_container_width=True
             )
 
-        with tab3:
+         with tab3:
             st.write(df.head())
 
     else:
