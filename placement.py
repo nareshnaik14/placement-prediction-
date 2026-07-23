@@ -143,23 +143,23 @@ if page == "🏠 Dashboard":
          st.dataframe(df.head())
     else:
          st.warning("Please upload Student Dataset.")
-    total_students = len(df)
-    placed = len(df[df["Placement_Status"]=="Placed"])
-    not_placed = len(df[df["Placement_Status"]=="Not Placed"])
-    placement_percentage = (placed/total_students)*100
-    avg_salary = df["Salary_LPA"].mean()
-    c1,c2,c3,c4 = st.columns(4)
+         total_students = len(df)
+         placed = len(df[df["Placement_Status"]=="Placed"])
+         not_placed = len(df[df["Placement_Status"]=="Not Placed"])
+         placement_percentage = (placed/total_students)*100
+         avg_salary = df["Salary_LPA"].mean()
+         c1,c2,c3,c4 = st.columns(4)
 
-    c1.metric("Students", total_students )
-    c2.metric("Placed",placed )
-    c3.metric("Placement %", f"{placement_percentage:.2f}%" )
-    c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
+         c1.metric("Students", total_students )
+         c2.metric("Placed",placed )
+         c3.metric("Placement %", f"{placement_percentage:.2f}%" )
+         c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
 
-""" st.markdown("---")
+    """ st.markdown("---")
 
-    tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
+       tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
-with tab1:
+      with tab1:
 
       st.dataframe(
              df,
