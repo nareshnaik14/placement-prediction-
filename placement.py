@@ -135,9 +135,10 @@ def load_data(file):
 # DASHBOARD
 # -------------------------------------------------------
 if page == "🏠 Dashboard":
+    df=None
     if df is not None:
          st.header("📋 Dashboard")
-         df=None
+         
          st.success("Dataset Loaded Successfully")
          st.subheader("Dataset Preview")
          st.dataframe(df.head())
