@@ -374,15 +374,100 @@ elif page == "📊 Data Analysis":
     with col1:
         fig = px.pie(
         result,
-         names="Predicted_Placement",
-    title="Predicted Placement Percentage",
-    hole=0.45,
-    color="Predicted_Placement",
-    color_discrete_map={
+        names="Predicted_Placement",
+        title="Predicted Placement Percentage",
+        hole=0.45,
+        color="Predicted_Placement",
+        color_discrete_map={
             "Placed": "green",
             "Not Placed": "red"
            }
        )
+        st.plotly_chart(fig, use_container_width=True)
+
+     # Salary Distribution
+     with col2:
+        fig = px.histogram(
+        result,
+        x="Predicted_Salary",
+        nbins=20,
+        title="Predicted Salary Distribution"
+    )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("---")
+
+        col3, col4 = st.columns(2)
+
+         # CGPA vs Placement
+    with col3:
+
+     fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="CGPA",
+        color="Predicted_Placement",
+        title="CGPA vs Predicted Placement"
+    )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+     # Coding Score vs Placement
+    with col4:
+
+       fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="Coding_Score",
+        color="Predicted_Placement",
+        title="Coding Score vs Predicted Placement"
+    )
+
+         st.plotly_chart(fig, use_container_width=True)
+
+         st.markdown("---")
+
+          col5, col6 = st.columns(2)
+
+     # Interview Score
+with col5:
+
+    fig = px.box(
+        result,
+        x="Predicted_Placement",
+        y="Interview_Score",
+        color="Predicted_Placement",
+        title="Interview Score Analysis"
+    )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+# Attendance
+with col6:
+
+    fig = px.histogram(
+        result,
+        x="Attendance",
+        color="Predicted_Placement",
+        title="Attendance Distribution"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("---")
+
+    st.subheader("Predicted Salary by Student")
+
+fig = px.bar(
+    result.sort_values("Predicted_Salary", ascending=False),
+    x="Student_ID",
+    y="Predicted_Salary",
+    color="Predicted_Placement",
+    title="Expected Salary for Each Student"
+)
+
+      st.plotly_chart(fig, use_container_width=True)
 
   
 # -------------------------------------------------------
