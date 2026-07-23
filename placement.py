@@ -109,7 +109,7 @@ single_student = st.sidebar.file_uploader(
     type=["csv", "xlsx", "xls", "json", "txt", "tsv", "pdf", "pptx"]
 )
 
-df = None
+df1 = None
 
 if student_dataset is not None:
     df1 = load_data(student_dataset)
@@ -145,50 +145,70 @@ Features Used:
 # -------------------------------------------------------
 # DASHBOARD
 # -------------------------------------------------------
+# -------------------------------------------------------
+# DASHBOARD
+# -------------------------------------------------------
 if page == "🏠 Dashboard":
+
+    st.header("📊 Placement Prediction Dashboard")
+
+    # ==========================
+    # Training Dataset Dashboard
+    # ==========================
+    st.subheader("📘 Training Dataset")
+
     if df is not None:
-         st.header("📋 Dashboard")
-         
-         st.success("Dataset Loaded Successfully")
-         st.subheader("Dataset Preview")
-         st.dataframe(df.head(), use_container_width=True)
-         total_students = len(df)
-         placed = len(df[df["Placement_Status"]=="Placed"])
-         not_placed = len(df[df["Placement_Status"]=="Not Placed"])
-         placement_percentage = (placed/total_students)*100
-         avg_salary = df["Salary_LPA"].mean()
-         c1,c2,c3,c4 = st.columns(4)
 
-         c1.metric("Students", total_students )
-         c2.metric("Placed",placed )
-         c3.metric("Placement %", f"{placement_percentage:.2f}%" )
-         c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
-        
+        total_students = len(df)
+        placed = len(df[df["Placement_Status"] == "Placed"])
+        not_placed = len(df[df["Placement_Status"] == "Not Placed"])
+        placement_percentage = (placed / total_students) * 100
+        avg_salary = df["Salary_LPA"].mean()
 
-         st.markdown("---")
+        c1, c2, c3, c4 = st.columns(4)
 
-         tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
-         with tab1:
-            st.dataframe(
-                df,
-                use_container_width=True
-            )
+        c1.metric("Total Students", total_students)
+        c2.metric("Placed", placed)
+        c3.metric("Not Placed", not_placed)
+        c4.metric("Placement %", f"{placement_percentage:.2f}%")
 
-         with tab2:
-            st.dataframe(
-                df.describe(include="all"),
-                use_container_width=True
-            )
+        st.metric("Average Salary", f"{avg_salary:.2f} LPA")
 
-         with tab3:
-            st.write(df.head())
+        tab1, tab2, tab3 = st.tabs(
+            ["Training Dataset", "Statistics", "Preview"]
+        )
+
+        with tab1:
+            st.dataframe(df, use_container_width=True)
+
+        with tab2:
+            st.dataframe(df.describe(include="all"),
+                         use_container_width=True)
+
+        with tab3:
+            st.dataframe(df.head())
 
     else:
-    
-       st.warning(
-     "Please upload Student Dataset."
-     )
-       #student_dataset = st.sidebar.file_uploader(...)
+        st.error("Training dataset not found.")
+
+    st.markdown("---")
+
+    # ==========================
+    # Uploaded Student Dataset
+    # ==========================
+    st.subheader("📄 Uploaded Student Dataset")
+
+    if df1 is not None:
+
+        st.success("Student Dataset Uploaded Successfully")
+
+        st.write(f"Total Uploaded Students : {len(df1)}")
+
+        st.dataframe(df1, use_container_width=True)
+
+    else:
+        st.warning("Please upload a student dataset from the sidebar.")
+
 # -------------------------------------------------------
 # DATA ANALYSIS
 # ------------------------------------------------------- 
