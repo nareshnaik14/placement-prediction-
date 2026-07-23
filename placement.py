@@ -155,9 +155,10 @@ if page == "🏠 Dashboard":
     # ==========================
     # Training Dataset Dashboard
     # ==========================
-    st.subheader("📘 Training Dataset")
+    st.subheader("📘 student data set")
 
     if df is not None:
+        
 
         total_students = len(df)
         placed = len(df[df["Placement_Status"] == "Placed"])
@@ -173,6 +174,7 @@ if page == "🏠 Dashboard":
         c4.metric("Placement %", f"{placement_percentage:.2f}%")
 
         st.metric("Average Salary", f"{avg_salary:.2f} LPA")
+         st.subheader("company dataset")
 
         tab1, tab2, tab3 = st.tabs(
             ["Training Dataset", "Statistics", "Preview"]
