@@ -369,35 +369,28 @@ elif page == "📊 Data Analysis":
                     color_discrete_map={
                         "Placed": "green","Not Placed": "red" })
             st.plotly_chart(fig, use_container_width=True)
-     # Salary Distribution
-    with col2:
-        fig = px.histogram(
-        result,
-        x="Predicted_Salary",
-        nbins=20,
-        title="Predicted Salary Distribution"
-    )
-
-        st.plotly_chart(fig, use_container_width=True)
-
-        st.markdown("---")
-
-        col3, col4 = st.columns(2)
-
-         # CGPA vs Placement
-    with col3:
-        fig = px.box(
-            result,
-            x="Predicted_Placement",
-            y="CGPA",
-            color="Predicted_Placement",
-            title="CGPA vs Predicted Placement")
-        st.plotly_chart(fig, use_container_width=True)
-
-         # Coding Score vs Placement
-    with col4:
-
-       fig = px.box(
+            # Salary Distribution
+            with col2:
+                fig = px.histogram(
+                    result,
+                    x="Predicted_Salary",
+                    nbins=20,
+                    title="Predicted Salary Distribution")
+            st.plotly_chart(fig, use_container_width=True)
+            st.markdown("---")
+            col3, col4 = st.columns(2)
+            # CGPA vs Placement
+             with col3:
+                 fig = px.box(
+                     result,
+                     x="Predicted_Placement",
+                     y="CGPA",
+                     color="Predicted_Placement",
+                     title="CGPA vs Predicted Placement")
+                 st.plotly_chart(fig, use_container_width=True)
+                 # Coding Score vs Placement
+         with col4:
+             fig = px.box(
            result,
            x="Predicted_Placement",
            y="Coding_Score",
