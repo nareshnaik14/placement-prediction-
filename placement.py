@@ -13,8 +13,8 @@ import joblib
 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomTreeClassifier
+from sklearn.ensemble import RandomTreeRegressor
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -180,9 +180,9 @@ if page == "🏠 Dashboard":
 
         st.subheader("Prediction Results")
 
-        st.dataframe(df1, use_container_width=True)
+        st.dataframe(result, use_container_width=True)
 
-        csv = df1.to_csv(index=False).encode("utf-8")
+        csv = result.to_csv(index=False).encode("utf-8")
 
         st.download_button(
             "📥 Download Prediction Results",
