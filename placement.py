@@ -184,7 +184,7 @@ if page == "🏠 Dashboard":
     
        st.warning(
      "Please upload Student Dataset."
-        )
+       )
         student_dataset = st.sidebar.file_uploader(...)
 # -------------------------------------------------------
 # DATA ANALYSIS
