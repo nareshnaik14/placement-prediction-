@@ -194,6 +194,19 @@ elif page=="📊 Data Analysis":
     st.header("📊 Student Dataset Analysis")
 
     if df is not None:
+         # Show Placed students first
+        display_df = df.sort_values(
+            by="Placement_Status",
+            key=lambda x: x.map({
+                "Placed": 0,
+                "Not Placed": 1
+            })
+        ).reset_index(drop=True)
+
+        st.dataframe(
+            display_df,
+            use_container_width=True
+        )
 
         st.dataframe(df.head())
 
