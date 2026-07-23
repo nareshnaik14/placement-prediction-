@@ -118,16 +118,17 @@ def load_data(student_dataset):
  # if student_dataset is not None:
    #  df=load_data(student_dataset)
 
-    if student_datase.name.endswith(".csv"):
-        df = pd.read_csv(file)
-    elif student_datase.name.endswith(".xlsx"):
-        df = pd.read_excel(file)
-    elif student_datase.name.endswith(".xls"):
-        df = pd.read_excel(file)
+    if student_dataset.name.endswith(".csv"):
+        df = pd.read_csv(student_dataset)
+    elif student_dataset.name.endswith(".xlsx"):
+        df = pd.read_excel(student_dataset)
+    elif student_dataset.name.endswith(".xls"):
+        df = pd.read_excel(student_dataset)
     
     else:
         st.error("Please upload a CSV or Excel (.xlsx/.xls) file.")
         st.stop()
+        return None
 
     return df
     df= None
