@@ -304,12 +304,12 @@ elif page == "📊 Data Analysis":
         #result = pd.read_excel("student data.xlsx")
         st.write("Session Keys:", list(st.session_state.keys()))
         st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
-        result = pd.read_excel("student data.xlsx")
+        result1 = pd.read_excel("student data.xlsx")
 
         st.subheader("🎓 Student Prediction Table")
 
         st.dataframe(
-            result,
+            result1,
             use_container_width=True
         )
 
@@ -317,13 +317,13 @@ elif page == "📊 Data Analysis":
 
         c1, c2, c3, c4 = st.columns(4)
 
-        total = len(result)
+        total = len(result1)
 
-        placed = (result["Predicted_Placement"] == "Placed").sum()
+        placed = (result1["Predicted_Placement"] == "Placed").sum()
 
-        not_placed = (result["Predicted_Placement"] == "Not Placed").sum()
+        not_placed = (result1["Predicted_Placement"] == "Not Placed").sum()
 
-        avg_salary = result["Predicted_Salary"].mean()
+        avg_salary = result1["Predicted_Salary"].mean()
 
         c1.metric("Total Students", total)
         c2.metric("Placed", placed)
@@ -334,7 +334,7 @@ elif page == "📊 Data Analysis":
 
         st.subheader("📋 Student Placement Report")
 
-        report = result[[
+        report = result1[[
             "Student_ID",
             "CGPA",
             "Coding_Score",
