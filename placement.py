@@ -359,7 +359,7 @@ elif page == "📊 Data Analysis":
             st.header("📈 Student Prediction Analytics")
     #result = st.session_state["prediction_df"]
             col1, col2 = st.columns(2)
-        with col1:
+    with col1:
             fig = px.pie(
                 result,
            names="Predicted_Placement",
