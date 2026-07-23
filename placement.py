@@ -372,7 +372,7 @@ elif page == "📊 Data Analysis":
     col1, col2 = st.columns(2)
 
 # Placement Pie Chart
-  with col1:
+with col1:
 
      fig = px.pie(
         result,
@@ -390,6 +390,8 @@ elif page == "📊 Data Analysis":
 # -------------------------------------------------------
 # MODEL TRAINING
 # -------------------------------------------------------
+
+
 elif page == "🤖 Model Training":
 
     st.header("🤖 Train Placement Prediction Models")
