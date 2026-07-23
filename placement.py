@@ -115,7 +115,7 @@ Features Used:
 @st.cache_data
 def load_data(student_dataset):
     #student_dataset=st.sidebar.file_uploader(....)
-if student_dataset is not None:
+  if student_dataset is not None:
      df=load_data(student_dataset)
 
     if student_datase.name.endswith(".csv"):
