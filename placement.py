@@ -445,8 +445,7 @@ elif page == "📊 Data Analysis":
         )
 
     else:
-
-    st.warning("⚠ Please train the model first to view student predictions.")
+        st.warning("⚠ Please train the model first to view student predictions.")
     st.markdown("---")
     st.header("📈 Student Prediction Analytics")
     result = st.session_state["prediction_df"]
