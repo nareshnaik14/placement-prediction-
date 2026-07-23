@@ -70,12 +70,12 @@ st.sidebar.markdown("---")
 
 student_dataset = st.sidebar.file_uploader(
     "Upload Student Dataset",
-    type=["csv","xlsx", "xls", "json", "txt", "tsv"]
+    type=["csv","xlsx", "xls", "json", "txt", "tsv","pdf"]
 )
 
 single_student = st.sidebar.file_uploader(
     "Upload Single Student File",
-    type=["csv","xlsx", "xls", "json", "txt", "tsv"]
+    type=["csv","xlsx", "xls", "json", "txt", "tsv","pdf"]
 )
 
 st.sidebar.markdown("---")
