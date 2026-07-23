@@ -188,7 +188,8 @@ if page == "🏠 Dashboard":
        #student_dataset = st.sidebar.file_uploader(...)
 # -------------------------------------------------------
 # DATA ANALYSIS
-# -------------------------------------------------------
+# ------------------------------------------------------- 
+
 elif page=="📊 Data Analysis":
 
     st.header("📊 Student Dataset Analysis")
