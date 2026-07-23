@@ -82,7 +82,8 @@ st.sidebar.markdown("---")
 
 st.sidebar.info(
 """
-Features Used
+Features Used:
+
 ✔ CGPA
 
 ✔ Coding Score
