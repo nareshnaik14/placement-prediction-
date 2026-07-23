@@ -646,7 +646,6 @@ elif page == "🤖 Model Training":
             # -----------------------------------
             # Predict Uploaded Dataset
             # -----------------------------------
-              st.write(df1)
 
             if df1 is not None:
 
