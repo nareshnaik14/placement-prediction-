@@ -134,6 +134,7 @@ def load_data(file):
 # -------------------------------------------------------
 if page == "🏠 Dashboard":
     st.header("📋 Dashboard")
+    df=None
     if df is not None:
         total_students = len(df)
         placed = len(df[df["Placement_Status"]=="Placed"])
