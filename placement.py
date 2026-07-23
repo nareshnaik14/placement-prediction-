@@ -165,13 +165,13 @@ if page == "🏠 Dashboard":
          st.markdown("---")
 
          tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
-                 with tab1:
+         with tab1:
             st.dataframe(
                 df,
                 use_container_width=True
             )
 
-        with tab2:
+         with tab2:
             st.dataframe(
                 df.describe(include="all"),
                 use_container_width=True
