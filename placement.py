@@ -238,6 +238,8 @@ if page == "🏠 Dashboard":
 elif page=="📊 Data Analysis":
 
     st.header("📊 Student Data Analysis")
+    st.write("Session State Keys:")
+    st.write(list(st.session_state.keys()))
 
     if "prediction_df" in st.session_state:
 
