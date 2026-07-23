@@ -646,6 +646,7 @@ elif page == "🤖 Model Training":
             # -----------------------------------
             # Predict Uploaded Dataset
             # -----------------------------------
+             st.write(df1)
 
             if df1 is not None:
 
@@ -662,13 +663,16 @@ elif page == "🤖 Model Training":
 
                 salary_prediction =st.session_state["regressor"].predict(X_student)
                # Convert Placement Labels
-                student["Predicted_Placement"] =st.session_state[ "le"].inverse_transform(
+                student["Predicted_Placement"] =st.session_state[ "label_encoder"].inverse_transform(
                     placement_prediction
                 )
                  # Add Salary Prediction
                 student["Predicted_Salary"] = salary_prediction.round(2)
                  # Save Prediction Dataset
                 st.session_state["prediction_df"] = student
+                st.success("Prediction saved successfully.")
+                st.write(st.session_state.keys())
+                st.dataframe(st.session_state["prediction_df"])
 
                 st.markdown("---")
 
