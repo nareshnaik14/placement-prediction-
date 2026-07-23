@@ -656,7 +656,7 @@ elif page == "🤖 Model Training":
                     "No": 0
                 })
 
-                X_student = student[st.session_state["features"]
+                X_student = student[st.session_state["features"]]
 
                 placement_prediction =st.session_state["classifier"].predict(X_student)
 
