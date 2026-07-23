@@ -76,7 +76,8 @@ student_dataset = st.sidebar.file_uploader(
 single_student = st.sidebar.file_uploader(
     "Upload Single Student File",
     type=["csv","xlsx", "xls", "json", "txt", "tsv","pdf","pptx"]
-)
+) 
+st.write(student_dataset)
 
 st.sidebar.markdown("---")
 
