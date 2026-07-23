@@ -144,7 +144,7 @@ if df is not None:
     st.subheader("Dataset Preview")
     st.dataframe(df.head())
 
-elif:
+else:
     st.warning("Please upload Student Dataset.")
     total_students = len(df)
     placed = len(df[df["Placement_Status"]=="Placed"])
@@ -157,7 +157,8 @@ elif:
     c2.metric("Placed",placed )
     c3.metric("Placement %", f"{placement_percentage:.2f}%" )
     c4.metric( "Average Salary", f"{avg_salary:.2f} LPA" )
-    st.markdown("---")
+
+""" st.markdown("---")
 
     tab1,tab2,tab3 = st.tabs( [ "Dataset","Statistics","Preview"])
 
@@ -179,7 +180,7 @@ else:
     st.warning(
      "Please upload Student Dataset."
         )
-      student_dataset = st.sidebar.file_uploader(...)
+      student_dataset = st.sidebar.file_uploader(...)"""
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
