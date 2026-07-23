@@ -273,7 +273,7 @@ elif page=="📈 Model Performance":
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
- elif page == "📊 Data Analysis":
+elif page == "📊 Data Analysis":
 
     st.header("📊 Student Placement Analytics")
 
