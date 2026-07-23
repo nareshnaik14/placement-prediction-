@@ -353,8 +353,8 @@ elif page == "📊 Data Analysis":
             fig = px.box(result, ...)
             st.subheader("📈 Student Prediction Analytics")
             st.dataframe(result)
-        else:
-            st.warning("⚠ Please train the model first.")
+        #else:
+           # st.warning("⚠ Please train the model first.")
     st.markdown("---")
     st.header("📈 Student Prediction Analytics")
     #result = st.session_state["prediction_df"]
