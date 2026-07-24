@@ -238,14 +238,17 @@ elif page == "📊 Data Analysis":
     st.header("📊 Student Data Analysis")
     st.write("Session State Keys:")
     st.write(list(st.session_state.keys()))
+    result1=None
 
     if "prediction_df" in st.session_state:
         result1 = st.session_state["prediction_df"]
     elif os.path.exists("student data.xlsx"):
         result1 = pd.read_excel("student data.xlsx")
+    if result1 is not None:
+        st.subheader("🎓 Student Prediction Table")
+        st.dataframe(result1, use_container_width=True)
         st.write("Session Keys:", list(st.session_state.keys()))
         st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
-        result1 = pd.read_excel("student data.xlsx")
 
         st.subheader("🎓 Student Prediction Table")
 
@@ -611,6 +614,9 @@ elif page == "🤖 Model Training":
                 st.write("After Saving:", list(st.session_state.keys()))
                 st.write("Prediction rows:", len(student))
                 st.success("Prediction saved successfully.")
+                st.success("Prediction saved successfully.")
+                st.write("Session Keys:", list(st.session_state.keys()))
+                st.write("prediction_df exists:", "prediction_df" in st.session_state)
                 # Save prediction results
                 student.to_excel("student data.xlsx", index=False)
                 st.success("Prediction completed successfully.")
