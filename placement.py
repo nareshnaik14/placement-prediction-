@@ -231,17 +231,6 @@ if page == "🏠 Dashboard":
         st.warning("Please upload a student dataset from the sidebar.")
 
 
-
-
-# -------------------------------------------------------
-# MODEL PERFORMANCE
-# -------------------------------------------------------
-
-elif page=="📈 Model Performance":
-
-    st.header("📈 Model Performance")
-
-    st.info("Accuracy, Confusion Matrix and Reports will be here")
 # -------------------------------------------------------
 # DATA ANALYSIS
 # -------------------------------------------------------
@@ -597,6 +586,7 @@ elif page == "🤖 Model Training":
 
            # if df1 is not None:
             if df1 is not None:
+                st.write("student dataset uploaded:",df11 is not None)
 
                 student = df1.copy()
 
