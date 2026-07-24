@@ -388,20 +388,19 @@ elif page == "🤖 Model Training":
     if df is not None:
         st.success("Dataset Loaded Successfully")
         st.write(df.shape)
+
         if st.button("🚀 Train Models"):
             data = df.copy()
 
             # -----------------------------------
             # Encode Categorical Columns
             # -----------------------------------
-
             data["Internship"] = data["Internship"].map({
                 "Yes": 1,
                 "No": 0
             })
 
             le = LabelEncoder()
-
             data["Placement_Status"] = le.fit_transform(
                 data["Placement_Status"]
             )
@@ -409,7 +408,6 @@ elif page == "🤖 Model Training":
             # -----------------------------------
             # Features
             # -----------------------------------
-
             features = [
                 "CGPA",
                 "Coding_Score",
@@ -425,132 +423,68 @@ elif page == "🤖 Model Training":
             # -----------------------------------
             # Classification Model
             # -----------------------------------
-
             X = data[features]
             y = data["Placement_Status"]
 
             X_train, X_test, y_train, y_test = train_test_split(
-                X,
-                y,
-                test_size=0.20,
-                random_state=42
+                X, y, test_size=0.20, random_state=42
             )
 
-            classifier = DecisionTreeClassifier(
-                random_state=42
-            )
+            classifier = DecisionTreeClassifier(random_state=42)
             classifier.fit(X_train, y_train)
             y_pred = classifier.predict(X_test)
-            
-            accuracy = accuracy_score(
-                y_test,
-                y_pred
-            )
+            accuracy = accuracy_score(y_test, y_pred)
 
             # -----------------------------------
             # Regression Model
             # -----------------------------------
-
             X_salary = data[features]
             y_salary = data["Salary_LPA"]
 
             X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
-                X_salary,
-                y_salary,
-                test_size=0.20,
-                random_state=42
+                X_salary, y_salary, test_size=0.20, random_state=42
             )
 
-            regressor = DecisionTreeRegressor(
-                random_state=42
-            )
+            regressor = DecisionTreeRegressor(random_state=42)
+            regressor.fit(X_train_s, y_train_s)
+            salary_pred = regressor.predict(X_test_s)
 
-            regressor.fit(
-                X_train_s,
-                y_train_s
-            )
-
-            salary_pred = regressor.predict(
-                X_test_s
-            )
-
-            mae = mean_absolute_error(
-                y_test_s,
-                salary_pred
-            )
-
-            r2 = r2_score(
-                y_test_s,
-                salary_pred
-            )
+            mae = mean_absolute_error(y_test_s, salary_pred)
+            r2 = r2_score(y_test_s, salary_pred)
 
             # -----------------------------------
             # Save Models
             # -----------------------------------
-
-            joblib.dump(
-                classifier,
-                "placement_model.pkl"
-            )
-
-            joblib.dump(
-                regressor,
-                "salary_model.pkl"
-            )
-
-            joblib.dump(
-                le,
-                "label_encoder.pkl"
-            )
+            joblib.dump(classifier, "placement_model.pkl")
+            joblib.dump(regressor, "salary_model.pkl")
+            joblib.dump(le, "label_encoder.pkl")
 
             # Store in session state
-
             st.session_state["classifier"] = classifier
             st.session_state["regressor"] = regressor
             st.session_state["label_encoder"] = le
             st.session_state["features"] = features
 
             # -----------------------------------
-            # training result
+            # Training Result
             # -----------------------------------
-
             st.success("✅ Models Trained Successfully")
 
             c1, c2, c3 = st.columns(3)
-
-            c1.metric(
-                "Classification Accuracy",
-                f"{accuracy*100:.2f}%"
-            )
-
-            c2.metric(
-                "Regression R² Score",
-                f"{r2:.3f}"
-            )
-
-            c3.metric(
-                "Mean Absolute Error",
-                f"{mae:.2f}"
-            )
+            c1.metric("Classification Accuracy", f"{accuracy*100:.2f}%")
+            c2.metric("Regression R² Score", f"{r2:.3f}")
+            c3.metric("Mean Absolute Error", f"{mae:.2f}")
 
             st.markdown("---")
 
             # -----------------------------------
             # Feature Importance
             # -----------------------------------
-
             importance = pd.DataFrame({
-
                 "Feature": features,
-
                 "Importance": classifier.feature_importances_
-
             })
-
-            importance = importance.sort_values(
-                "Importance",
-                ascending=False
-            )
+            importance = importance.sort_values("Importance", ascending=False)
 
             fig = px.bar(
                 importance,
@@ -560,87 +494,86 @@ elif page == "🤖 Model Training":
                 color="Importance",
                 title="Feature Importance"
             )
+            st.plotly_chart(fig, use_container_width=True)
+            st.dataframe(importance, use_container_width=True)
 
-            st.plotly_chart(
-                fig,
-                use_container_width=True
-            )
-
-            st.dataframe(
-                importance,
-                use_container_width=True
-            )
+            st.markdown("---")
 
             # -----------------------------------
             # Predict Uploaded Dataset
             # -----------------------------------
-
-           # if df1 is not None:
-            if df1 is not None:
-                st.write("student dataset uploaded:",df1 is not None)
-
+            if df1 is None:
+                st.info("Upload a student dataset in the sidebar, then click "
+                         "🚀 Train Models again to generate predictions.")
+            else:
                 student = df1.copy()
 
-                student["Internship"] = student["Internship"].map({
-                    "Yes": 1,
-                    "No": 0
-                })
+                # ---- Validate required columns exist ----
+                missing_cols = [c for c in features if c not in student.columns]
+                if missing_cols:
+                    st.error(
+                        f"❌ Uploaded student dataset is missing required "
+                        f"column(s): {missing_cols}. "
+                        f"Expected columns: {features}"
+                    )
+                else:
+                    # ---- Encode Internship safely ----
+                    student["Internship"] = (
+                        student["Internship"]
+                        .astype(str)
+                        .str.strip()
+                        .str.capitalize()
+                        .map({"Yes": 1, "No": 0})
+                    )
 
-                X_student = student[st.session_state["features"]]
+                    if student["Internship"].isna().any():
+                        st.warning(
+                            "⚠ Some rows had an 'Internship' value other than "
+                            "Yes/No — those rows were dropped."
+                        )
+                        student = student.dropna(subset=["Internship"])
 
-                placement_prediction =st.session_state["classifier"].predict(X_student)
+                    if student.empty:
+                        st.error("❌ No valid rows left to predict after cleaning.")
+                    else:
+                        try:
+                            X_student = student[st.session_state["features"]]
 
-                salary_prediction =st.session_state["regressor"].predict(X_student)
-               # Convert Placement Labels
-                student["Predicted_Placement"] =st.session_state[ "label_encoder"].inverse_transform(
-                    placement_prediction
-                )
-                 # Add Salary Prediction
-                student["Predicted_Salary"] = salary_prediction.round(2)
-                 # Save Prediction Dataset
-                st.session_state["prediction_df"] = student
-                st.write("After Saving:", list(st.session_state.keys()))
-                st.write("Prediction rows:", len(student))
-                st.success("Prediction saved successfully.")
-                st.success("Prediction saved successfully.")
-                st.write("Session Keys:", list(st.session_state.keys()))
-                st.write("prediction_df exists:", "prediction_df" in st.session_state)
-                # Save prediction results
-                student.to_excel("student data.xlsx", index=False)
-                st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
-                st.success("Prediction completed successfully.")
-                st.write(st.session_state.keys())
-                st.dataframe(student,use_container_width=True)
-                st.dataframe(st.session_state["prediction_df"])
+                            placement_prediction = st.session_state["classifier"].predict(X_student)
+                            salary_prediction = st.session_state["regressor"].predict(X_student)
 
-                st.markdown("---")
+                            student["Predicted_Placement"] = (
+                                st.session_state["label_encoder"]
+                                .inverse_transform(placement_prediction)
+                            )
+                            student["Predicted_Salary"] = salary_prediction.round(2)
 
-                st.subheader("🎯 Prediction Results")
+                            # Save prediction dataset to session state
+                            st.session_state["prediction_df"] = student
 
-                st.dataframe(
-                    student,
-                    use_container_width=True
-                )
+                            # Persist to disk as backup
+                            student.to_excel("student data.xlsx", index=False)
 
-                csv = student.to_csv(index=False).encode("utf-8")
+                            st.success("✅ Prediction completed and saved successfully.")
+                            st.write("Prediction rows:", len(student))
 
-                st.download_button(
-                    "📥 Download Prediction Results",
-                    csv,
-                    "placement_predictions.csv",
-                    "text/csv"
-                )
+                            st.markdown("---")
+                            st.subheader("🎯 Prediction Results")
+                            st.dataframe(student, use_container_width=True)
 
-            else:
+                            csv = student.to_csv(index=False).encode("utf-8")
+                            st.download_button(
+                                "📥 Download Prediction Results",
+                                csv,
+                                "placement_predictions.csv",
+                                "text/csv"
+                            )
 
-                st.info(
-                    "Upload a student dataset to generate predictions."
-                )
+                        except Exception as e:
+                            st.error(f"❌ Prediction failed: {e}")
 
     else:
-
         st.error("Training dataset not found.")
-
  # -------------------------------------------------------
 # MODEL PERFORMANCE
 # -------------------------------------------------------
