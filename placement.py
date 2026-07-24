@@ -437,12 +437,7 @@ elif page == "🤖 Model Training":
     if df is not None:
         st.success("Dataset Loaded Successfully")
         st.write(df.shape)
-    else:
-        st.warning("Upload Dataset")
-        st.write("Before Training:", list(st.session_state.keys()))
-        st.header("🤖 Train Placement Prediction Models")
-    if st.button("🚀 Train Models"):
-
+        if st.button("🚀 Train Models"):
             data = df.copy()
 
             # -----------------------------------
