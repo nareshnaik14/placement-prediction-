@@ -589,7 +589,7 @@ elif page == "🤖 Model Training":
 
            # if df1 is not None:
             if df1 is not None:
-                st.write("student dataset uploaded:",df11 is not None)
+                st.write("student dataset uploaded:",df1 is not None)
 
                 student = df1.copy()
 
@@ -619,6 +619,7 @@ elif page == "🤖 Model Training":
                 st.write("prediction_df exists:", "prediction_df" in st.session_state)
                 # Save prediction results
                 student.to_excel("student data.xlsx", index=False)
+                st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
                 st.success("Prediction completed successfully.")
                 st.write(st.session_state.keys())
                 st.dataframe(student,use_container_width=True)
