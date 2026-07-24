@@ -99,6 +99,11 @@ def auto_rename_columns(df):
         found = find_column(df, exp)
         if found and found != exp:
             rename_map[found] = exp
+
+    # Explicit rename for known real-world column name in this dataset
+    if "Placement" in df.columns and "Placement_Status" not in df.columns:
+        rename_map["Placement"] = "Placement_Status"
+
     if rename_map:
         df = df.rename(columns=rename_map)
     return df
