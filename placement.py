@@ -236,8 +236,8 @@ if page == "🏠 Dashboard":
 # -------------------------------------------------------
 elif page == "📊 Data Analysis":
     st.header("📊 Student Data Analysis")
-    st.write("Session State Keys:")
-    st.write(list(st.session_state.keys()))
+    #st.write("Session State Keys:")
+    #st.write(list(st.session_state.keys()))
     result1=None
 
     if "prediction_df" in st.session_state:
@@ -247,15 +247,15 @@ elif page == "📊 Data Analysis":
     if result1 is not None:
         st.subheader("🎓 Student Prediction Table")
         st.dataframe(result1, use_container_width=True)
-        st.write("Session Keys:", list(st.session_state.keys()))
-        st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
+        #st.write("Session Keys:", list(st.session_state.keys()))
+        #st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
 
-        st.subheader("🎓 Student Prediction Table")
+      #  st.subheader("🎓 Student Prediction Table")
 
-        st.dataframe(
-            result1,
-            use_container_width=True
-        )
+       # st.dataframe(
+        #    result1,
+        #    use_container_width=True
+        #)
 
         st.markdown("---")
 
@@ -307,24 +307,24 @@ elif page == "📊 Data Analysis":
             "text/csv"
         )
 
-    else:
-        st.warning("⚠ Please train the model first to view student predictions.")
-        if "prediction_df" in st.session_state:
-            result = st.session_state["prediction_df"]
-            fig = px.pie(result, ...)
-            fig = px.histogram(result, ...)
-            fig = px.box(result, ...)
-            st.subheader("📈 Student Prediction Analytics")
-            st.dataframe(result)
+    #else:
+       # st.warning("⚠ Please train the model first to view student predictions.")
+       # if "prediction_df" in st.session_state:
+           # result = st.session_state["prediction_df"]
+           # fig = px.pie(result, ...)
+           # fig = px.histogram(result, ...)
+           # fig = px.box(result, ...)
+           # st.subheader("📈 Student Prediction Analytics")
+           # st.dataframe(result)
         #else:
            # st.warning("⚠ Please train the model first.")
-    #st.markdown("---")
+            st.markdown("---")
             st.header("📈 Student Prediction Analytics")
     #result = st.session_state["prediction_df"]
             col1, col2 = st.columns(2)
             with col1:
                 fig = px.pie(
-                result,
+                result1,
                     names="Predicted_Placement",
                     title="Predicted Placement Percentage",
                     hole=0.45,
@@ -382,13 +382,15 @@ elif page == "📊 Data Analysis":
             st.plotly_chart(fig, use_container_width=True)
             st.markdown("---")
             st.subheader("Predicted Salary by Student")
-            fig = px.bar(
-                result.sort_values("Predicted_Salary", ascending=False),
+            #fig = px.bar(
+             #   result.sort_values("Predicted_Salary", ascending=False),
             x="Student_ID",
             y="Predicted_Salary",
             color="Predicted_Placement",
             title="Expected Salary for Each Student")
             st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.warning("⚠ Please train the model first to view student predictions.")
 
   
 # -------------------------------------------------------
