@@ -581,7 +581,6 @@ elif page == "🤖 Model Training":
 elif page == "📈 Model Performance":
 
     st.header("📈 Model Performance Dashboard")
-
     if df is not None:
 
         data = df.copy()
