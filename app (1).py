@@ -79,8 +79,34 @@ st.sidebar.markdown("---")
 def load_training_data():
     return pd.read_excel("Company_Placement_Dataset.xlsx")
 
+def normalize(name):
+    return str(name).strip().lower().replace(" ", "_").replace("-", "_")
+
+def find_column(df, target):
+    """Find a column matching `target` regardless of case/spacing/underscores."""
+    target_norm = normalize(target)
+    for col in df.columns:
+        if normalize(col) == target_norm:
+            return col
+    return None
+
+def auto_rename_columns(df):
+    """Rename df columns in-place to match expected FEATURES/target names
+    if a close match is found (handles case/space/underscore differences)."""
+    rename_map = {}
+    expected = FEATURES + ["Placement_Status", "Salary_LPA", "Student_ID"]
+    for exp in expected:
+        found = find_column(df, exp)
+        if found and found != exp:
+            rename_map[found] = exp
+    if rename_map:
+        df = df.rename(columns=rename_map)
+    return df
+
 try:
     df = load_training_data()
+    if df is not None:
+        df = auto_rename_columns(df)
 except Exception as e:
     df = None
     st.error(f"❌ Could not load training dataset: {e}")
@@ -113,6 +139,7 @@ student_dataset = st.sidebar.file_uploader(
 if student_dataset is not None:
     parsed = load_uploaded(student_dataset)
     if parsed is not None:
+        parsed = auto_rename_columns(parsed)
         st.session_state["uploaded_df1"] = parsed
         st.session_state["uploaded_df1_name"] = student_dataset.name
 
@@ -144,6 +171,12 @@ st.sidebar.write("Training data loaded:", df is not None)
 st.sidebar.write("Student file uploaded:", df1 is not None)
 st.sidebar.write("Model trained:", "classifier" in st.session_state)
 st.sidebar.write("Predictions ready:", "prediction_df" in st.session_state)
+
+with st.sidebar.expander("🔍 Debug: Training dataset columns"):
+    if df is not None:
+        st.write(list(df.columns))
+    else:
+        st.write("No training dataset loaded.")
 
 # =========================================================
 # DASHBOARD
@@ -474,6 +507,15 @@ elif page == "📈 Model Performance":
     if df is None:
         st.warning("Please Upload Student Dataset")
     else:
+        missing_perf_cols = [c for c in FEATURES + ["Placement_Status", "Salary_LPA"]
+                              if c not in df.columns]
+        if missing_perf_cols:
+            st.error(
+                f"❌ Training dataset is missing required column(s): {missing_perf_cols}"
+            )
+            st.info(f"Columns found in dataset: {list(df.columns)}")
+            st.stop()
+
         data = df.copy()
         data["Internship"] = (
             data["Internship"].astype(str).str.strip().str.capitalize()
