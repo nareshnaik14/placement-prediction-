@@ -278,11 +278,10 @@ elif page == "📊 Data Analysis":
     st.write("Session State Keys:")
     st.write(list(st.session_state.keys()))
 
-   # if "prediction_df" in st.session_state:
-    if os.path.exists("student data.xlsx"):
-
-       # result = st.session_state["prediction_df"]
-        #result = pd.read_excel("student data.xlsx")
+    if "prediction_df" in st.session_state:
+        result1 = st.session_state["prediction_df"]
+    elif os.path.exists("student data.xlsx"):
+        result1 = pd.read_excel("student data.xlsx")
         st.write("Session Keys:", list(st.session_state.keys()))
         st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
         result1 = pd.read_excel("student data.xlsx")
