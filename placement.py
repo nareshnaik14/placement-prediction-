@@ -318,7 +318,7 @@ elif page == "📊 Data Analysis":
            # st.dataframe(result)
         #else:
            # st.warning("⚠ Please train the model first.")
-            st.markdown("---")
+        st.markdown("---")
             st.header("📈 Student Prediction Analytics")
     #result = st.session_state["prediction_df"]
             col1, col2 = st.columns(2)
