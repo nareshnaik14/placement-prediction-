@@ -236,37 +236,25 @@ if page == "🏠 Dashboard":
 # -------------------------------------------------------
 elif page == "📊 Data Analysis":
     st.header("📊 Student Data Analysis")
-    #st.write("Session State Keys:")
-    #st.write(list(st.session_state.keys()))
-    result1=None
+
+    result1 = None
 
     if "prediction_df" in st.session_state:
         result1 = st.session_state["prediction_df"]
     elif os.path.exists("student data.xlsx"):
         result1 = pd.read_excel("student data.xlsx")
+
     if result1 is not None:
+
         st.subheader("🎓 Student Prediction Table")
         st.dataframe(result1, use_container_width=True)
-        #st.write("Session Keys:", list(st.session_state.keys()))
-        #st.write("Prediction file exists:", os.path.exists("student data.xlsx"))
-
-      #  st.subheader("🎓 Student Prediction Table")
-
-       # st.dataframe(
-        #    result1,
-        #    use_container_width=True
-        #)
 
         st.markdown("---")
 
         c1, c2, c3, c4 = st.columns(4)
-
         total = len(result1)
-
         placed = (result1["Predicted_Placement"] == "Placed").sum()
-
         not_placed = (result1["Predicted_Placement"] == "Not Placed").sum()
-
         avg_salary = result1["Predicted_Salary"].mean()
 
         c1.metric("Total Students", total)
@@ -293,93 +281,103 @@ elif page == "📊 Data Analysis":
             "Predicted_Salary"
         ]]
 
-        st.dataframe(
-            report,
-            use_container_width=True
-        )
+        st.dataframe(report, use_container_width=True)
 
         csv = report.to_csv(index=False).encode("utf-8")
-
         st.download_button(
             "📥 Download Student Prediction Report",
             csv,
             "student_prediction_report.csv",
             "text/csv"
         )
+
+        # -----------------------------------
+        # Analytics Charts (moved here so they can actually run)
+        # -----------------------------------
         st.markdown("---")
-            st.header("📈 Student Prediction Analytics")
-    #result = st.session_state["prediction_df"]
-            col1, col2 = st.columns(2)
-            with col1:
-                fig = px.pie(
+        st.header("📈 Student Prediction Analytics")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            fig = px.pie(
                 result1,
-                    names="Predicted_Placement",
-                    title="Predicted Placement Percentage",
-                    hole=0.45,
-                    color="Predicted_Placement",
-                    color_discrete_map={
-                        "Placed": "green","Not Placed": "red" })
+                names="Predicted_Placement",
+                title="Predicted Placement Percentage",
+                hole=0.45,
+                color="Predicted_Placement",
+                color_discrete_map={"Placed": "green", "Not Placed": "red"}
+            )
             st.plotly_chart(fig, use_container_width=True)
-            # Salary Distribution
-            with col2:
-                fig = px.histogram(
-                    result,
-                    x="Predicted_Salary",
-                    nbins=20,
-                    title="Predicted Salary Distribution")
+
+        with col2:
+            fig = px.histogram(
+                result1,
+                x="Predicted_Salary",
+                nbins=20,
+                title="Predicted Salary Distribution"
+            )
             st.plotly_chart(fig, use_container_width=True)
-            st.markdown("---")
-            col3, col4 = st.columns(2)
-            # CGPA vs Placement
-            with col3:
-                 fig = px.box(
-                     result,
-                     x="Predicted_Placement",
-                     y="CGPA",
-                     color="Predicted_Placement",
-                     title="CGPA vs Predicted Placement")
-                 st.plotly_chart(fig, use_container_width=True)
-                 # Coding Score vs Placement
-            with col4:
-             fig = px.box(
-                result,
+
+        st.markdown("---")
+        col3, col4 = st.columns(2)
+
+        with col3:
+            fig = px.box(
+                result1,
                 x="Predicted_Placement",
-                 y="Coding_Score",
-                 color="Predicted_Placement",
-                 title="Coding Score vs Predicted Placement")
+                y="CGPA",
+                color="Predicted_Placement",
+                title="CGPA vs Predicted Placement"
+            )
             st.plotly_chart(fig, use_container_width=True)
-            st.markdown("---")
-            col5, col6 = st.columns(2)
-           # Interview Score
-            with col5:
-                fig = px.box(
-                    result,
-                   x="Predicted_Placement",
-                       y="Interview_Score",
-                      color="Predicted_Placement",
-                       title="Interview Score Analysis")
-            
+
+        with col4:
+            fig = px.box(
+                result1,
+                x="Predicted_Placement",
+                y="Coding_Score",
+                color="Predicted_Placement",
+                title="Coding Score vs Predicted Placement"
+            )
             st.plotly_chart(fig, use_container_width=True)
-        # Attendance
-            with col6:
-                fig = px.histogram(
-                 result,
+
+        st.markdown("---")
+        col5, col6 = st.columns(2)
+
+        with col5:
+            fig = px.box(
+                result1,
+                x="Predicted_Placement",
+                y="Interview_Score",
+                color="Predicted_Placement",
+                title="Interview Score Analysis"
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+        with col6:
+            fig = px.histogram(
+                result1,
                 x="Attendance",
                 color="Predicted_Placement",
-                title="Attendance Distribution")
+                title="Attendance Distribution"
+            )
             st.plotly_chart(fig, use_container_width=True)
-            st.markdown("---")
-            st.subheader("Predicted Salary by Student")
-            #fig = px.bar(
-             #   result.sort_values("Predicted_Salary", ascending=False),
+
+        st.markdown("---")
+        st.subheader("Predicted Salary by Student")
+
+        fig = px.bar(
+            result1.sort_values("Predicted_Salary", ascending=False),
             x="Student_ID",
             y="Predicted_Salary",
             color="Predicted_Placement",
-            title="Expected Salary for Each Student")
-            st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.warning("⚠ Please train the model first to view student predictions.")
+            title="Expected Salary for Each Student"
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
+    else:
+        st.warning("⚠ Please train the model first to view student predictions.")
   
 # -------------------------------------------------------
 # MODEL TRAINING
